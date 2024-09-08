@@ -21,27 +21,29 @@ body, html {
 
 header {
     background-color: #333;
-    padding: 10px 20px;
-    text-align: flex;
-    color: white;
-}
-
-nav {
-    text-align: center;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    margin-top: 20px;
-    justify-content: flex-end;
-}
-
-nav a {
-    color: #b3cc99;
-    margin-left: 20px;
-    text-decoration: none;
     padding: 10px;
-    background-color: #4a4a4a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+.logo {
+    display: flex;
+    align-items: center;
+}
+.logo h1 {
+    margin-left: 10px;
+}
+nav a {
+    margin-left: 15px;
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #4CAF50;
     border-radius: 5px;
+}
+nav a:hover {
+    background-color: #45a049;
 }
 
 .row {
@@ -83,7 +85,7 @@ h2 {
 }
 
 .buttons button {
-    background-color: #b3cc99;
+    background-color: #4CAF50;
     color: black;
     border: 4px solid #4a4a4a;
     padding: 15px 25px;
@@ -97,6 +99,7 @@ h2 {
 
 .buttons button:hover {
     transform: scale(1.1);
+    background-color: #45a049;
 }
 
 /* Parent Container */
@@ -255,8 +258,8 @@ canvas {
 }
 
 .action-buttons button {
-    background-color: #6b8e23;
-    color: white;
+    background-color: #4CAF50;
+    color: black;
     border: 3px solid #4a4a4a;
     padding: 20px 40px;
     font-size: 1.2em;
@@ -265,5 +268,5 @@ canvas {
 }
 
 .action-buttons button:hover {
-    background-color: #556b2f;
+    background-color: #45a049;
 }

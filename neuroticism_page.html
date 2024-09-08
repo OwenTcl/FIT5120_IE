@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5F5;
+        }
+        header {
+            background-color: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo h1 {
+            margin-left: 10px;
+        }
+        nav a {
+            margin-left: 15px;
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #45a049;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .result-section {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .personality-title {
+            background-color: #a54e15;
+            color: white;
+        }
+        .personality-description {
+            background-color: #76228e;
+            color: white;
+        }
+        .recommended-activities {
+            background-color: #4682B4;
+            color: white;
+        }
+        h2, h3 {
+            margin: 0;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .activity-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .activity-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 0 15px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .activity-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="home.html"><img src="LogoDraft.png" class="logo" width="80" height="80"></a>
+        <h1>ElderIsolation</h1>
+    </div>
+
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="info.html">Info</a>
+        <a href="personality_test.html">Find Hobby</a>
+        <a href="#">Page 3</a>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- Personality Type Section -->
+    <div class="result-section personality-title">
+        <h2>Your Personality is:</h2>
+        <h1 id="personalityType">Neuroticism</h1>
+    </div>
+
+    <!-- Personality Description Section -->
+    <div class="result-section personality-description">
+        <h3>Neuroticism</h3>
+        <p id="personalityDescription">
+            People high in neuroticism are often more sensitive to stress and anxiety.
+            They might seek recreational activities that help them relax, manage stress, or provide a sense of control.
+        </p>
+    </div>
+
+    <!-- Recommended Activities Section -->
+    <div class="result-section recommended-activities">
+        <h2>Recommended Activities</h2>
+        <div class="activity-buttons">
+            <button class="activity-button">Mindfulness and Relaxation</button>
+            <button class="activity-button">Low-Stress Hobbies</button>
+            <button class="activity-button">Physical Activities</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

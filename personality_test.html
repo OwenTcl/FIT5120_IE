@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Five Personality Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo h1 {
+            margin-left: 10px;
+        }
+        nav a {
+            margin-left: 15px;
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #45a049;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .question {
+            margin-bottom: 50px;
+        }
+        .question-label {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .scale {
+            display: flex;
+            justify-content: space-around;
+
+        }
+        .scale label {
+            margin: 0 10px;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="home.html"><img src="LogoDraft.png" class="logo" width="80" height="80"></a>
+        <h1>ElderIsolation</h1>
+    </div>
+
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="info.html">Info</a>
+        <a href="personality_test.html">Find Hobby</a>
+        <a href="#">Page 3</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Please answer the following questions</h2>
+    <form id="quizForm">
+        <!-- Extraversion -->
+        <div class="question">
+            <label class="question-label">I see myself as someone who is outgoing, sociable.</label>
+            <div class="scale">
+                <label><input type="radio" name="extraversion1" value="1"> 1</label>
+                <label><input type="radio" name="extraversion1" value="2"> 2</label>
+                <label><input type="radio" name="extraversion1" value="3"> 3</label>
+                <label><input type="radio" name="extraversion1" value="4"> 4</label>
+                <label><input type="radio" name="extraversion1" value="5"> 5</label>
+            </div>
+        </div>
+        <div class="question">
+            <label class="question-label">I see myself as someone who is reserved.</label>
+            <div class="scale">
+                <label><input type="radio" name="extraversion2" value="1"> 1</label>
+                <label><input type="radio" name="extraversion2" value="2"> 2</label>
+                <label><input type="radio" name="extraversion2" value="3"> 3</label>
+                <label><input type="radio" name="extraversion2" value="4"> 4</label>
+                <label><input type="radio" name="extraversion2" value="5"> 5</label>
+            </div>
+        </div>
+
+        <!-- Agreeableness -->
+        <div class="question">
+            <label class="question-label">I see myself as someone who is considerate and kind to almost everyone.</label>
+            <div class="scale">
+                <label><input type="radio" name="agreeableness1" value="1"> 1</label>
+                <label><input type="radio" name="agreeableness1" value="2"> 2</label>
+                <label><input type="radio" name="agreeableness1" value="3"> 3</label>
+                <label><input type="radio" name="agreeableness1" value="4"> 4</label>
+                <label><input type="radio" name="agreeableness1" value="5"> 5</label>
+            </div>
+        </div>
+        <div class="question">
+            <label class="question-label">I see myself as someone who is sometimes rude to others.</label>
+            <div class="scale">
+                <label><input type="radio" name="agreeableness2" value="1"> 1</label>
+                <label><input type="radio" name="agreeableness2" value="2"> 2</label>
+                <label><input type="radio" name="agreeableness2" value="3"> 3</label>
+                <label><input type="radio" name="agreeableness2" value="4"> 4</label>
+                <label><input type="radio" name="agreeableness2" value="5"> 5</label>
+            </div>
+        </div>
+
+        <!-- Conscientiousness -->
+        <div class="question">
+            <label class="question-label">I see myself as someone who does things thoroughly.</label>
+            <div class="scale">
+                <label><input type="radio" name="conscientiousness1" value="1"> 1</label>
+                <label><input type="radio" name="conscientiousness1" value="2"> 2</label>
+                <label><input type="radio" name="conscientiousness1" value="3"> 3</label>
+                <label><input type="radio" name="conscientiousness1" value="4"> 4</label>
+                <label><input type="radio" name="conscientiousness1" value="5"> 5</label>
+            </div>
+        </div>
+        <div class="question">
+            <label class="question-label">I see myself as someone who tends to be lazy.</label>
+            <div class="scale">
+                <label><input type="radio" name="conscientiousness2" value="1"> 1</label>
+                <label><input type="radio" name="conscientiousness2" value="2"> 2</label>
+                <label><input type="radio" name="conscientiousness2" value="3"> 3</label>
+                <label><input type="radio" name="conscientiousness2" value="4"> 4</label>
+                <label><input type="radio" name="conscientiousness2" value="5"> 5</label>
+            </div>
+        </div>
+
+        <!-- Neuroticism -->
+        <div class="question">
+            <label class="question-label">I see myself as someone who gets nervous easily.</label>
+            <div class="scale">
+                <label><input type="radio" name="neuroticism1" value="1"> 1</label>
+                <label><input type="radio" name="neuroticism1" value="2"> 2</label>
+                <label><input type="radio" name="neuroticism1" value="3"> 3</label>
+                <label><input type="radio" name="neuroticism1" value="4"> 4</label>
+                <label><input type="radio" name="neuroticism1" value="5"> 5</label>
+            </div>
+        </div>
+        <div class="question">
+            <label class="question-label">I see myself as someone who remains calm in tense situations.</label>
+            <div class="scale">
+                <label><input type="radio" name="neuroticism2" value="1"> 1</label>
+                <label><input type="radio" name="neuroticism2" value="2"> 2</label>
+                <label><input type="radio" name="neuroticism2" value="3"> 3</label>
+                <label><input type="radio" name="neuroticism2" value="4"> 4</label>
+                <label><input type="radio" name="neuroticism2" value="5"> 5</label>
+            </div>
+        </div>
+
+        <!-- Openness -->
+        <div class="question">
+            <label class="question-label">I see myself as someone who is open to new experiences, complex.</label>
+            <div class="scale">
+                <label><input type="radio" name="openness1" value="1"> 1</label>
+                <label><input type="radio" name="openness1" value="2"> 2</label>
+                <label><input type="radio" name="openness1" value="3"> 3</label>
+                <label><input type="radio" name="openness1" value="4"> 4</label>
+                <label><input type="radio" name="openness1" value="5"> 5</label>
+            </div>
+        </div>
+        <div class="question">
+            <label class="question-label">I see myself as someone who prefers work that is routine.</label>
+            <div class="scale">
+                <label><input type="radio" name="openness2" value="1"> 1</label>
+                <label><input type="radio" name="openness2" value="2"> 2</label>
+                <label><input type="radio" name="openness2" value="3"> 3</label>
+                <label><input type="radio" name="openness2" value="4"> 4</label>
+                <label><input type="radio" name="openness2" value="5"> 5</label>
+            </div>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    // Function to calculate the Big Five personality scores and redirect based on the highest score
+    function calculatePersonalityScores() {
+        // Get all the radio button values (assuming the form has radio buttons with name attributes like 'extraversion1', 'agreeableness1', etc.)
+        const extraversion1 = parseInt(document.querySelector('input[name="extraversion1"]:checked').value);
+        const extraversion2 = parseInt(document.querySelector('input[name="extraversion2"]:checked').value); // reverse-scored
+
+        const agreeableness1 = parseInt(document.querySelector('input[name="agreeableness1"]:checked').value);
+        const agreeableness2 = parseInt(document.querySelector('input[name="agreeableness2"]:checked').value); // reverse-scored
+
+        const conscientiousness1 = parseInt(document.querySelector('input[name="conscientiousness1"]:checked').value);
+        const conscientiousness2 = parseInt(document.querySelector('input[name="conscientiousness2"]:checked').value); // reverse-scored
+
+        const neuroticism1 = parseInt(document.querySelector('input[name="neuroticism1"]:checked').value);
+        const neuroticism2 = parseInt(document.querySelector('input[name="neuroticism2"]:checked').value); // reverse-scored
+
+        const openness1 = parseInt(document.querySelector('input[name="openness1"]:checked').value);
+        const openness2 = parseInt(document.querySelector('input[name="openness2"]:checked').value); // reverse-scored
+
+        // Reverse score function: reverse the score for reverse-scored items
+        function reverseScore(score) {
+            return 6 - score; // Reverse a score on a scale from 1 to 5
+        }
+
+        // Calculate the scores for each trait
+        const extraversionScore = extraversion1 + reverseScore(extraversion2);
+        const agreeablenessScore = agreeableness1 + reverseScore(agreeableness2);
+        const conscientiousnessScore = conscientiousness1 + reverseScore(conscientiousness2);
+        const neuroticismScore = neuroticism1 + reverseScore(neuroticism2);
+        const opennessScore = openness1 + reverseScore(openness2);
+
+        // Store the scores in an object
+        const scores = {
+            extraversion: extraversionScore,
+            agreeableness: agreeablenessScore,
+            conscientiousness: conscientiousnessScore,
+            neuroticism: neuroticismScore,
+            openness: opennessScore
+        };
+
+        // Find the personality trait with the highest score
+        const highestTrait = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+        // Redirect the user to a different page based on the highest personality score
+        switch (highestTrait) {
+            case "extraversion":
+                window.location.href = "extraversion_page.html"; // Redirect to the page for Extraversion
+                break;
+            case "agreeableness":
+                window.location.href = "agreeableness_page.html"; // Redirect to the page for Agreeableness
+                break;
+            case "conscientiousness":
+                window.location.href = "conscientiousness_page.html"; // Redirect to the page for Conscientiousness
+                break;
+            case "neuroticism":
+                window.location.href = "neuroticism_page.html"; // Redirect to the page for Neuroticism
+                break;
+            case "openness":
+                window.location.href = "openness_page.html"; // Redirect to the page for Openness
+                break;
+            default:
+                alert("Unable to determine the highest trait."); // Fallback if no trait is highest
+        }
+    }
+
+    // Call the function when the form is submitted
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form from submitting normally
+        calculatePersonalityScores(); // Calculate the scores and redirect to the relevant page
+    });
+</script>
+
+</body>
+</html>
