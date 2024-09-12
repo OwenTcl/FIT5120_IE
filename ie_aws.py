@@ -12,26 +12,26 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # 初始化数据库(initial database)
 db = SQLAlchemy(app)
 
-# 定义模型（ set a database model) （TEST)
-class Facility(db.Model):
-    __tablename__ = 'facilities'
-    FacilityName = db.Column(db.String(255), primary_key=True)
-    Latitude = db.Column(db.Numeric(10, 7))
-    Longitude = db.Column(db.Numeric(10, 7))
-    SportsPlayed = db.Column(db.String(255))
-    Category = db.Column(db.String(255))
+# 定义 Maps 模型 (set a database model for the Maps table)
+class Map(db.Model):
+    __tablename__ = 'Maps'
+    FacilityName = db.Column(db.Text, primary_key=True)
+    Latitude = db.Column(db.Float)
+    Longitude = db.Column(db.Float)
+    Classification = db.Column(db.Text)
+    Category = db.Column(db.Text)
 
-@app.route('/facilities', methods=['GET'])
-def get_facilities():
-    facilities = Facility.query.all()
+@app.route('/maps', methods=['GET'])
+def get_maps():
+    maps = Map.query.all()
     results = [
         {
-            "FacilityName": facility.FacilityName,
-            "Latitude": str(facility.Latitude),
-            "Longitude": str(facility.Longitude),
-            "SportsPlayed": facility.SportsPlayed,
-            "Category": facility.Category
-        } for facility in facilities]
+            "FacilityName": map_item.FacilityName,
+            "Latitude": str(map_item.Latitude),
+            "Longitude": str(map_item.Longitude),
+            "Classification": map_item.Classification,
+            "Category": map_item.Category
+        } for map_item in maps]
 
     return jsonify(results)
 
@@ -41,7 +41,7 @@ def db_home():
 
 @app.route('/get', methods=['GET'])
 def get_data():
-    data = {'message': 'Hello from Flaskkk-kkkkbbkk-dkk goollld!'}
+    data = {'message': 'Hello from Flaskkk-kkkkbbkk-dkjjk goollld!'}
     return jsonify(data)
 
 @app.route('/post', methods=['POST'])
@@ -57,6 +57,7 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
