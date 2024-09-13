@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fist Tracking Game</title>
+    <style>
+        /* Center the content using Flexbox */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Center the video and canvas relative to the container */
+        .game-container {
+            position: relative;
+            width: 640px;
+            height: 480px;
+        }
+
+        /* Position video and canvas on top of each other */
+        video, canvas {
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Ensure score is displayed on top */
+        #score {
+            font-size: 24px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2; /* Ensure score stays on top */
+        }
+
+        /* Flip the video feed horizontally to remove mirroring */
+        video {
+            z-index: 1;
+            transform: scaleX(-1); /* Flip video horizontally */
+        }
+
+        /* Make sure canvas stays on top of video and does not block interactions */
+        canvas {
+            z-index: 2;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="score">Score: 0</div>
+        <video id="webcam" autoplay playsinline width="640" height="480"></video>
+        <canvas id="gameCanvas" width="640" height="480"></canvas>
+    </div>
+
+    <!-- TensorFlow.js and Hand Pose Detection Model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
+
+    <!-- Main Game Script -->
+    <script src="game_script.js"></script>
+</body>
+</html>
