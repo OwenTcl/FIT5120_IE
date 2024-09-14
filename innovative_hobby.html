@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovative Hobbies for Elderly</title>
+    <link rel="stylesheet" href="activities_style.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Link to JavaScript -->
+    <script src="fetch_data.js" defer></script>
+    <!-- Leaflet.js -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="home.html"><img src="LogoDraft.png" class="logo" width="80" height="80"></a>
+        <h1>ElderIsolation</h1>
+    </div>
+
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="info.html">Info</a>
+        <a href="personality_test.html">Find Hobby</a>
+        <a href="all_personalities_activities.html">Browse</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Innovative Hobbies include:</h2>
+    <div class="button-container">
+        <button class="sport-button" data-sport="Orienteering">Orienteering</button>
+        <button class="sport-button" data-sport="Carpet Bowls">Carpet Bowls</button>
+        <button class="sport-button" data-sport="Flying Disc">Flying Disc</button>
+    </div>
+
+    <div class="statistic-section">
+        <h3>Statistics</h3>
+        <div>
+            <ul id="statistic">
+                <!-- Statistics will be dynamically loaded here -->
+            </ul>
+        </div>
+    </div>
+
+    <div class="map-section">
+        <h3>Map</h3>
+        <div id="map"></div> <!-- This is where the map will be rendered -->
+<!--        <ul id="facilities-list">-->
+<!--            &lt;!&ndash; Facilities will be dynamically loaded here &ndash;&gt;-->
+<!--        </ul>-->
+    </div>
+</div>
+
+</body>
+</html>
