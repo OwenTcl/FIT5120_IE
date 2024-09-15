@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities in Your Suburb</title>
+    <link rel="stylesheet" href="activities_style.css">
+    <script src="fetch_data_1.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="home.html"><img src="LogoDraft.png" class="logo" width="80" height="80"></a>
+            <h1>ElderIsolation</h1>
+        </div>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="info.html">Info</a>
+            <a href="personality_test.html">Find Hobby</a>
+            <a href="all_personalities_activities.html">Browse</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Recommended activities in your area:</h2>
+        <div class="button-container" id="activityButtons">
+            <!-- Activity buttons will be dynamically added here -->
+        </div>
+        <h3 id="chartDescription"></h3>
+        <div id="chartContainer">
+<!--            <p id="chartDescription"></p> &lt;!&ndash; Dynamic description of the chart &ndash;&gt;-->
+            <canvas id="activityChart" width="400" height="200"></canvas>
+        </div>
+        <div class="image-container" id="activityImages">
+                <!-- Activity images will appear here -->
+        </div>
+        <div class="map-section">
+            <h3>Location of the selected activity</h3>
+            <div id="map"></div> <!-- The map will render here -->
+        </div>
+    </div>
+</body>
+</html>
