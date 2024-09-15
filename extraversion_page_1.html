@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="personality_traits_style.css">
+    <script src="personality_trait.js" defer></script>
+    <title>Personality Results</title>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="home.html"><img src="LogoDraft.png" class="logo" width="80" height="80"></a>
+        <h1>ElderIsolation</h1>
+    </div>
+
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="info.html">Info</a>
+        <a href="personality_test.html">Find Hobby</a>
+        <a href="all_personalities_activities.html">Browse</a>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- Personality Type Section -->
+    <div class="result-section personality-title">
+        <h2>Your Personality is:</h2>
+        <h1 id="personalityType">Extroversion</h1>
+    </div>
+
+    <!-- Personality Description Section -->
+    <div class="result-section personality-description">
+        <h3>Extroversion</h3>
+        <p id="personalityDescription">
+            Extraverted individuals are sociable, energetic, and thrive in environments with lots of interaction.
+            They are likely to specialize in recreational activities that involve socializing, excitement, and high energy.
+        </p>
+    </div>
+
+    <div class="result-section recommended-activities">
+        <h2>Select your suburb to find activities in your area:</h2>
+        <select id="suburbDropdown">
+            <option value="" disabled selected>Select your suburb</option>
+        </select>
+        <button id="submitSuburb">Submit</button>
+    </div>
+
+
+</div>
+</body>
+</html>
