@@ -296,3 +296,97 @@ function plotStackedChart(categories, maleParticipation, femaleParticipation) {
         }
     });
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const personality = urlParams.get('personality');
+
+    // Load slideshow images based on the personality trait
+    loadSlideshowImages(personality);
+});
+
+function loadSlideshowImages(personality) {
+    const activityImagesDiv = document.getElementById('activityImages');
+    const folderPath = `${personality}/`; // Path to the folder for the personality trait
+
+    // Example: Dynamic list of image filenames for each personality (you could load this from a server too)
+    const imageFilenames = ['activity1.jpg', 'activity2.jpg', 'activity3.jpg', 'activity4.jpg', 'activity5.jpg', 'activity6.jpg'];  // Modify this array based on actual files
+
+    // Clear the container in case there are existing slides
+    activityImagesDiv.innerHTML = '';
+
+    // Dynamically add slides based on the number of images
+    imageFilenames.forEach(filename => {
+        const slideDiv = document.createElement('div');
+        slideDiv.classList.add('slides', 'fade');
+
+        const imgElement = document.createElement('img');
+        imgElement.src = folderPath + filename;
+        imgElement.style.width = '100%';
+
+        slideDiv.appendChild(imgElement);
+        activityImagesDiv.appendChild(slideDiv);
+    });
+
+    // Add the navigation arrows
+    activityImagesDiv.innerHTML += `
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    `;
+
+    showSlides(1);  // Initialize the slideshow
+}
+
+let slideIndex = 1;
+let autoSlideInterval;  // To store the interval for auto-sliding
+
+// Function to show slides
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("slides");
+
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+}
+
+// Function to advance slides manually
+function plusSlides(n) {
+    clearInterval(autoSlideInterval);  // Stop auto-sliding when user interacts
+    slideIndex += n;
+    showSlides(slideIndex);
+    startAutoSlide();  // Restart auto-sliding after manual navigation
+}
+
+// Function to start auto-sliding every 3 seconds
+function startAutoSlide() {
+    autoSlideInterval = setInterval(function() {
+        slideIndex++;
+        showSlides(slideIndex);
+    }, 3000);  // Change the slide every 3 seconds (3000ms)
+}
+
+// Initialize the slideshow and start auto-sliding
+function initSlideshow() {
+    showSlides(slideIndex);  // Show the first slide
+    startAutoSlide();        // Start auto-sliding
+}
+
+// Call the initialization function after loading the images
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const personality = urlParams.get('personality');
+
+    loadSlideshowImages(personality);  // Load images based on personality
+    initSlideshow();                   // Initialize the slideshow
+});
+
