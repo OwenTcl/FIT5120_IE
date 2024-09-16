@@ -110,14 +110,64 @@ function filterFacilitiesByPersonality(facilities, personality) {
     // Define recommended categories for each personality trait
     if (personality === "Extroversion") {
         recommendedCategories = ["Social Sports", "Dancing", "Adventure Activities"];
+        document.getElementById('activityDetails').innerHTML = `
+            <ul>
+                <li>Adventure activities combine nature exploration with moderate physical challenges, helping older adults interact with the outdoors while improving cardiovascular health and muscle strength. These activities also promote mental well-being.</li>
+            </ul>
+            <ul>
+                <li>Dancing not only serves as physical exercise but also as an excellent way for older adults to engage socially and improve mental well-being, offering enjoyable group activities.</li>
+            </ul>
+            <ul>
+                <li>Social sports combine light physical activity with social interaction, providing older adults with an enjoyable way to stay active while connecting with others.</li>
+            </ul>
+        `;
+
     } else if (personality === "Agreeableness") {
         recommendedCategories = ["Volunteering", "Group Fitness", "Team Sports"];
+        document.getElementById('activityDetails').innerHTML = `
+            <ul>
+                <li>Volunteering gives older adults the opportunity to stay active while contributing to the community, enhancing self-worth and maintaining physical and mental activity.</li>
+            </ul>
+            <ul>
+                <li>Group fitness encourages older adults to participate in fitness activities alongside others, boosting teamwork while promoting both social interaction and physical health.</li>
+            </ul>
+            <ul>
+                <li>Team sports foster cooperation and competition, helping older adults develop teamwork and cooperation skills while improving physical fitness.</li>
+            </ul>
+        `;
     } else if (personality === "Conscientiousness") {
         recommendedCategories = ["Organized Sports", "Crafts and Hobbies"];
+        document.getElementById('activityDetails').innerHTML = `
+            <ul>
+                <li>Organized sports involve structured games with set rules and teamwork, making them suitable for older adults to enjoy friendly competition while promoting physical health.</li>
+            </ul>
+            <ul>
+                <li>Craft hobbies improve hand-eye coordination and provide a sense of accomplishment by creating tangible items. These activities are ideal for older adults who enjoy hands-on projects to relieve stress.</li>
+            </ul>
+        `;
     } else if (personality === "Neuroticism") {
         recommendedCategories = ["Mindfulness and Relaxation", "Low-Stress Hobbies"];
+        document.getElementById('activityDetails').innerHTML = `
+            <ul>
+                <li>Mindfulness and relaxation activities help older adults reduce anxiety and stress by focusing on balance and relaxation, enhancing mental health and overall well-being.</li>
+            </ul>
+            <ul>
+                <li>Low-stress hobbies provide a relaxed, low-intensity form of exercise that helps older adults stay physically active without exerting too much effort, offering a calm and enjoyable atmosphere.</li>
+            </ul>
+        `;
     } else if (personality === "Openness to Experience") {
         recommendedCategories = ["Artistic Pursuits", "Traveling", "Innovative Hobbies"];
+        document.getElementById('activityDetails').innerHTML = `
+            <ul>
+                <li>Artistic pursuits offer a channel for self-expression and emotional release, helping older adults maintain cognitive function and creative thinking. These activities also encourage social interaction through art.</li>
+            </ul>
+            <ul>
+                <li>Travelling offers older adults opportunities to explore new environments, experience different cultures, relax, and improve mental well-being.</li>
+            </ul>
+            <ul>
+                <li>Innovative hobbies introduce unique and fun experiences that encourage older adults to try new things, adding diversity and excitement to their daily routines.</li>
+            </ul>
+        `;
     }
 
     // Filter the facilities based on the recommended categories for the personality
@@ -258,7 +308,7 @@ function generateDescription(personality, sortedData) {
     const topCategory = sortedData[0].category;
     const topParticipation = sortedData[0].total;
 
-    return `For the personality type ${personality}, the most popular activity category is ${topCategory}, with a total participation of ${topParticipation} (in thousands).`;
+    return `For the personality type ${personality}, the most popular activity is\n\n1. ${sortedData[0].category}\n2. ${sortedData[1].category}\n3. ${sortedData[2].category}`;
 };
 
 // Function to plot the stacked bar chart using Chart.js
@@ -297,96 +347,96 @@ function plotStackedChart(categories, maleParticipation, femaleParticipation) {
     });
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const personality = urlParams.get('personality');
-
-    // Load slideshow images based on the personality trait
-    loadSlideshowImages(personality);
-});
-
-function loadSlideshowImages(personality) {
-    const activityImagesDiv = document.getElementById('activityImages');
-    const folderPath = `${personality}/`; // Path to the folder for the personality trait
-
-    // Example: Dynamic list of image filenames for each personality (you could load this from a server too)
-    const imageFilenames = ['activity1.jpg', 'activity2.jpg', 'activity3.jpg', 'activity4.jpg', 'activity5.jpg', 'activity6.jpg'];  // Modify this array based on actual files
-
-    // Clear the container in case there are existing slides
-    activityImagesDiv.innerHTML = '';
-
-    // Dynamically add slides based on the number of images
-    imageFilenames.forEach(filename => {
-        const slideDiv = document.createElement('div');
-        slideDiv.classList.add('slides', 'fade');
-
-        const imgElement = document.createElement('img');
-        imgElement.src = folderPath + filename;
-        imgElement.style.width = '100%';
-
-        slideDiv.appendChild(imgElement);
-        activityImagesDiv.appendChild(slideDiv);
-    });
-
-    // Add the navigation arrows
-    activityImagesDiv.innerHTML += `
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    `;
-
-    showSlides(1);  // Initialize the slideshow
-}
-
-let slideIndex = 1;
-let autoSlideInterval;  // To store the interval for auto-sliding
-
-// Function to show slides
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("slides");
-
-    if (n > slides.length) {
-        slideIndex = 1;
-    }
-    if (n < 1) {
-        slideIndex = slides.length;
-    }
-
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-
-    slides[slideIndex - 1].style.display = "block";
-}
-
-// Function to advance slides manually
-function plusSlides(n) {
-    clearInterval(autoSlideInterval);  // Stop auto-sliding when user interacts
-    slideIndex += n;
-    showSlides(slideIndex);
-    startAutoSlide();  // Restart auto-sliding after manual navigation
-}
-
-// Function to start auto-sliding every 3 seconds
-function startAutoSlide() {
-    autoSlideInterval = setInterval(function() {
-        slideIndex++;
-        showSlides(slideIndex);
-    }, 3000);  // Change the slide every 3 seconds (3000ms)
-}
-
-// Initialize the slideshow and start auto-sliding
-function initSlideshow() {
-    showSlides(slideIndex);  // Show the first slide
-    startAutoSlide();        // Start auto-sliding
-}
-
-// Call the initialization function after loading the images
-document.addEventListener('DOMContentLoaded', function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const personality = urlParams.get('personality');
-
-    loadSlideshowImages(personality);  // Load images based on personality
-    initSlideshow();                   // Initialize the slideshow
-});
+//document.addEventListener('DOMContentLoaded', function () {
+//    const urlParams = new URLSearchParams(window.location.search);
+//    const personality = urlParams.get('personality');
+//
+//    // Load slideshow images based on the personality trait
+//    loadSlideshowImages(personality);
+//});
+//
+//function loadSlideshowImages(personality) {
+//    const activityImagesDiv = document.getElementById('activityImages');
+//    const folderPath = `${personality}/`; // Path to the folder for the personality trait
+//
+//    // Example: Dynamic list of image filenames for each personality (you could load this from a server too)
+//    const imageFilenames = ['activity1.jpg', 'activity2.jpg', 'activity3.jpg', 'activity4.jpg', 'activity5.jpg', 'activity6.jpg'];  // Modify this array based on actual files
+//
+//    // Clear the container in case there are existing slides
+//    activityImagesDiv.innerHTML = '';
+//
+//    // Dynamically add slides based on the number of images
+//    imageFilenames.forEach(filename => {
+//        const slideDiv = document.createElement('div');
+//        slideDiv.classList.add('slides', 'fade');
+//
+//        const imgElement = document.createElement('img');
+//        imgElement.src = folderPath + filename;
+//        imgElement.style.width = '100%';
+//
+//        slideDiv.appendChild(imgElement);
+//        activityImagesDiv.appendChild(slideDiv);
+//    });
+//
+//    // Add the navigation arrows
+//    activityImagesDiv.innerHTML += `
+//        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+//        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+//    `;
+//
+//    showSlides(1);  // Initialize the slideshow
+//}
+//
+//let slideIndex = 1;
+//let autoSlideInterval;  // To store the interval for auto-sliding
+//
+//// Function to show slides
+//function showSlides(n) {
+//    let i;
+//    let slides = document.getElementsByClassName("slides");
+//
+//    if (n > slides.length) {
+//        slideIndex = 1;
+//    }
+//    if (n < 1) {
+//        slideIndex = slides.length;
+//    }
+//
+//    for (i = 0; i < slides.length; i++) {
+//        slides[i].style.display = "none";
+//    }
+//
+//    slides[slideIndex - 1].style.display = "block";
+//}
+//
+//// Function to advance slides manually
+//function plusSlides(n) {
+//    clearInterval(autoSlideInterval);  // Stop auto-sliding when user interacts
+//    slideIndex += n;
+//    showSlides(slideIndex);
+//    startAutoSlide();  // Restart auto-sliding after manual navigation
+//}
+//
+//// Function to start auto-sliding every 3 seconds
+//function startAutoSlide() {
+//    autoSlideInterval = setInterval(function() {
+//        slideIndex++;
+//        showSlides(slideIndex);
+//    }, 3000);  // Change the slide every 3 seconds (3000ms)
+//}
+//
+//// Initialize the slideshow and start auto-sliding
+//function initSlideshow() {
+//    showSlides(slideIndex);  // Show the first slide
+//    startAutoSlide();        // Start auto-sliding
+//}
+//
+//// Call the initialization function after loading the images
+//document.addEventListener('DOMContentLoaded', function () {
+//    const urlParams = new URLSearchParams(window.location.search);
+//    const personality = urlParams.get('personality');
+//
+//    loadSlideshowImages(personality);  // Load images based on personality
+//    initSlideshow();                   // Initialize the slideshow
+//});
 

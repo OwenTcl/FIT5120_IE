@@ -63,8 +63,8 @@ h2 {
     background-color: #E0E0E0;
     color: #333;
     text-align: center;
-    padding: 30px;
-    margin-top: 20px;
+    padding: 10px;
+    margin-top: 10px;
     border-radius: 10px;
 }
 .map-section h3 {
@@ -88,47 +88,22 @@ h2 {
     margin-bottom: 20px;
 }
 
-.slideshow-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-}
-
-.slides {
-    display: none;
-    animation: fade 1.5s ease-in-out;  /* Optional: adds a fade effect */
-}
-
-@keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-}
-
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
+.activity-description {
+    background-color: #76228e;
     color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    line-height: 1.6;
+    margin-bottom: 10px;
 }
 
-.prev {
-    left: 0;
-    border-radius: 3px 0 0 3px;
-}
-
-.next {
-    right: 0;
-    border-radius: 0 3px 3px 0;
-}
-
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+.chart-description {
+    background-color: #a54e15;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
 }
