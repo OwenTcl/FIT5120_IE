@@ -28,6 +28,22 @@ const categoryColors = {
     "Innovative Hobbies": "darkred"
 };
 
+// Function to determine marker color based on the first matching category
+function getCategoryColor(categories) {
+    // Split the category string by commas and trim spaces
+    const facilityCategories = categories.split(',').map(cat => cat.trim());
+
+    // Find the first category that has a defined color
+    for (const category of facilityCategories) {
+        if (categoryColors[category]) {
+            return categoryColors[category];  // Return the first matching category color
+        }
+    }
+
+    // Return a default color if no matching category is found
+    return 'gray';  // Default color for unmatched categories
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Get the suburb (LGA) and personality from the URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -170,8 +186,13 @@ function filterFacilitiesByPersonality(facilities, personality) {
         `;
     }
 
-    // Filter the facilities based on the recommended categories for the personality
-    return facilities.filter(facility => recommendedCategories.includes(facility.Category));
+    return facilities.filter(facility => {
+        // Split the category string by commas (and remove any extra spaces)
+        const facilityCategories = facility.Category.split(',').map(cat => cat.trim());
+
+        // Check if any of the facility's categories exist in the recommendedCategories
+        return facilityCategories.some(category => recommendedCategories.includes(category));
+    });
 }
 
 // Function to add facilities to the map with colored markers based on category
@@ -188,8 +209,8 @@ function addFacilitiesToMap(facilities) {
         // Add a colored marker to the map for each facility
         L.circleMarker([latitude, longitude], {
             radius: 8,
-            fillColor: categoryColors[category] || 'gray', // Default color if category is not found
-            color: categoryColors[category] || 'gray',
+            fillColor: getCategoryColor(category) || 'gray', // Default color if category is not found
+            color: getCategoryColor(category) || 'gray',
             weight: 2,
             opacity: 1,
             fillOpacity: 0.8
@@ -212,15 +233,24 @@ function addLegend(visibleCategories) {
         existingLegend.remove();
     }
 
+    // Create a set to store unique categories
+    const uniqueCategories = new Set();
+
+    // Split categories and add individual ones to the set
+    visibleCategories.forEach(categoryString => {
+        const categoryArray = categoryString.split(',').map(cat => cat.trim());
+        categoryArray.forEach(category => uniqueCategories.add(category));
+    });
+
     // Create a new legend
     const legend = L.control({position: 'bottomright'});
 
     legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info legend');
 
-        // Loop through visible categories to create the legend
-        visibleCategories.forEach(category => {
-            const color = categoryColors[category] || 'gray';  // Get color for the category
+        // Loop through unique categories to create the legend
+        uniqueCategories.forEach(category => {
+            const color = getCategoryColor(category) || 'gray';  // Get color for the category
             div.innerHTML +=
                 `<i style="background: ${color}; width: 18px; height: 18px; display: inline-block; margin-right: 8px;"></i> ${category}<br>`;
         });
