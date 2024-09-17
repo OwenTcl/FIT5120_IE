@@ -305,10 +305,18 @@ function getRelevantCategories(personality) {
 
 // Function to generate a dynamic description based on the personality and data
 function generateDescription(personality, sortedData) {
-    const topCategory = sortedData[0].category;
-    const topParticipation = sortedData[0].total;
+//    const topCategory = sortedData[0].category;
+//    const topParticipation = sortedData[0].total;
 
-    return `For the personality type ${personality}, the most popular activity is\n\n1. ${sortedData[0].category}\n2. ${sortedData[1].category}\n3. ${sortedData[2].category}`;
+    let description = `For the personality type ${personality}, the most popular activities are:\n\n`;
+//    console.log(sortedData)
+
+    // Dynamically add categories from sortedData
+    sortedData.forEach((item, index) => {
+        description += `${index + 1}. ${item.category}\n`;
+    });
+
+    return description;
 };
 
 // Function to plot the stacked bar chart using Chart.js
