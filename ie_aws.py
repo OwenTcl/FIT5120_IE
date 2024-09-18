@@ -6,8 +6,8 @@ app = Flask(__name__)
 CORS(app)  # open CORS support
 
 # 配置数据库连接(confige database connection)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:password@iedata.cry0g6ckyhnu.ap-southeast-2.rds.amazonaws.com:3306/IE'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:password@database-2.cry0g6ckyhnu.ap-southeast-2.rds.amazonaws.com:3306/IE'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
 # 初始化数据库(initial database)
 db = SQLAlchemy(app)
@@ -41,7 +41,7 @@ def db_home():
 
 @app.route('/get', methods=['GET'])
 def get_data():
-    data = {'message': 'Hello from Flaskkk-kkkkbbkk-dkjjk goollld!'}
+    data = {'message': 'Hello from Flaskkk-!'}
     return jsonify(data)
 
 @app.route('/post', methods=['POST'])
@@ -57,6 +57,7 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
