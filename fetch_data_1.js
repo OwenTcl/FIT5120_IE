@@ -186,13 +186,8 @@ function filterFacilitiesByPersonality(facilities, personality) {
         `;
     }
 
-    return facilities.filter(facility => {
-        // Split the category string by commas (and remove any extra spaces)
-        const facilityCategories = facility.Category.split(',').map(cat => cat.trim());
-
-        // Check if any of the facility's categories exist in the recommendedCategories
-        return facilityCategories.some(category => recommendedCategories.includes(category));
-    });
+    // Filter the facilities based on the recommended categories for the personality
+    return facilities.filter(facility => recommendedCategories.includes(facility.Category));
 }
 
 // Function to add facilities to the map with colored markers based on category
@@ -233,23 +228,14 @@ function addLegend(visibleCategories) {
         existingLegend.remove();
     }
 
-    // Create a set to store unique categories
-    const uniqueCategories = new Set();
-
-    // Split categories and add individual ones to the set
-    visibleCategories.forEach(categoryString => {
-        const categoryArray = categoryString.split(',').map(cat => cat.trim());
-        categoryArray.forEach(category => uniqueCategories.add(category));
-    });
-
     // Create a new legend
     const legend = L.control({position: 'bottomright'});
 
     legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info legend');
 
-        // Loop through unique categories to create the legend
-        uniqueCategories.forEach(category => {
+        // Loop through visible categories to create the legend
+        visibleCategories.forEach(category => {
             const color = getCategoryColor(category) || 'gray';  // Get color for the category
             div.innerHTML +=
                 `<i style="background: ${color}; width: 18px; height: 18px; display: inline-block; margin-right: 8px;"></i> ${category}<br>`;
