@@ -60,14 +60,47 @@
             font-size: 16px;
             margin-bottom: 10px;
         }
+        .highlight {
+        background-color: #d4edda;
+        border-color: #28a745;
+        font-weight: bold;
+        }
+
+        .container {
+            width: 60%;
+            margin: 80px auto; /* 增加顶部空隙，以避免与固定进度条重叠 */
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 500px; /* 固定容器高度 */
+            overflow-y: scroll; /* 添加垂直滚动 */
+        }
         .scale {
             display: flex;
             justify-content: space-around;
-
         }
         .scale label {
             margin: 0 10px;
-            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            flex-grow: 1;
+            text-align: center;
+            cursor: pointer;
+        }
+        input[type="radio"] {
+            display: none;
+        }
+        input[type="radio"]:checked + label {
+            background-color: #d4edda;
+        }
+        .scale-description {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
         }
         button {
             background-color: #4CAF50;
@@ -77,9 +110,58 @@
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
         button:hover {
             background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        
+
+        #progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            margin-bottom: 20px;
+        }
+        #progress {
+            height: 20px;
+            background-color: #4CAF50;
+            width: 0%;
+        }
+
+        /* interactive design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+            nav {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav a {
+                margin-bottom: 10px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .scale {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .scale label {
+                margin-bottom: 10px;
+            }
+            header {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -99,12 +181,22 @@
     </nav>
 </header>
 
+<h2 style="text-align: center;">Please answer the following questions</h2>
+
+<div id="progress-bar">
+    <div id="progress"></div>
+</div>
+
 <div class="container">
-    <h2>Please answer the following questions</h2>
+
     <form id="quizForm">
         <!-- Extraversion -->
         <div class="question">
             <label class="question-label">I see myself as someone who is outgoing, sociable.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="extraversion1" value="1" required> 1</label>
                 <label><input type="radio" name="extraversion1" value="2"> 2</label>
@@ -115,6 +207,10 @@
         </div>
         <div class="question">
             <label class="question-label">I see myself as someone who is reserved.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="extraversion2" value="1" required> 1</label>
                 <label><input type="radio" name="extraversion2" value="2"> 2</label>
@@ -123,10 +219,14 @@
                 <label><input type="radio" name="extraversion2" value="5"> 5</label>
             </div>
         </div>
-
+    
         <!-- Agreeableness -->
         <div class="question">
             <label class="question-label">I see myself as someone who is considerate and kind to almost everyone.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="agreeableness1" value="1" required> 1</label>
                 <label><input type="radio" name="agreeableness1" value="2"> 2</label>
@@ -137,6 +237,10 @@
         </div>
         <div class="question">
             <label class="question-label">I see myself as someone who is sometimes rude to others.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="agreeableness2" value="1" required> 1</label>
                 <label><input type="radio" name="agreeableness2" value="2"> 2</label>
@@ -145,10 +249,14 @@
                 <label><input type="radio" name="agreeableness2" value="5"> 5</label>
             </div>
         </div>
-
+    
         <!-- Conscientiousness -->
         <div class="question">
             <label class="question-label">I see myself as someone who does things thoroughly.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="conscientiousness1" value="1" required> 1</label>
                 <label><input type="radio" name="conscientiousness1" value="2"> 2</label>
@@ -159,6 +267,10 @@
         </div>
         <div class="question">
             <label class="question-label">I see myself as someone who tends to be lazy.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="conscientiousness2" value="1" required> 1</label>
                 <label><input type="radio" name="conscientiousness2" value="2"> 2</label>
@@ -167,10 +279,14 @@
                 <label><input type="radio" name="conscientiousness2" value="5"> 5</label>
             </div>
         </div>
-
+    
         <!-- Neuroticism -->
         <div class="question">
             <label class="question-label">I see myself as someone who gets nervous easily.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="neuroticism1" value="1" required> 1</label>
                 <label><input type="radio" name="neuroticism1" value="2"> 2</label>
@@ -181,6 +297,10 @@
         </div>
         <div class="question">
             <label class="question-label">I see myself as someone who remains calm in tense situations.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="neuroticism2" value="1" required> 1</label>
                 <label><input type="radio" name="neuroticism2" value="2"> 2</label>
@@ -189,10 +309,14 @@
                 <label><input type="radio" name="neuroticism2" value="5"> 5</label>
             </div>
         </div>
-
+    
         <!-- Openness -->
         <div class="question">
             <label class="question-label">I see myself as someone who is open to new experiences, complex.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="openness1" value="1" required> 1</label>
                 <label><input type="radio" name="openness1" value="2"> 2</label>
@@ -203,6 +327,10 @@
         </div>
         <div class="question">
             <label class="question-label">I see myself as someone who prefers work that is routine.</label>
+            <div class="scale-description">
+                <span>1 (Strongly Disagree)</span>
+                <span>5 (Strongly Agree)</span>
+            </div>
             <div class="scale">
                 <label><input type="radio" name="openness2" value="1" required> 1</label>
                 <label><input type="radio" name="openness2" value="2"> 2</label>
@@ -211,43 +339,174 @@
                 <label><input type="radio" name="openness2" value="5"> 5</label>
             </div>
         </div>
+        <div style="text-align: center; margin-top: 20px;"></div>
+            <button id="submit" type="submit">Submit</button>
+        </div>
 
-        <button type="submit">Submit</button>
+       
     </form>
 </div>
 
 <script>
-    // Function to calculate the Big Five personality scores and redirect based on the highest score
+    // check if all questions had already done
+    function checkCompletion() {
+        const totalQuestions = document.querySelectorAll('.question').length; // 获取总问题数
+        const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length; // 获取已回答问题数
+        return answeredQuestions === totalQuestions; // 如果已回答问题数等于总问题数，返回true
+    }
+
+    // submitButton
+    document.getElementById('submit').addEventListener('click', function() {
+        if (checkCompletion()) {
+            document.getElementById('quizForm').submit(); // 所有问题回答完毕，提交表单
+        } else {
+            alert("Please complete all the questions before submitting!"); // 如果有未回答问题，弹出提示
+        }
+    });
+</script>
+
+<script>
+       window.onload = function() {
+    restoreProgressFromStorage(); // 从 sessionStorage 恢复进度和选择
+    highlightSelected(); // 确保选项高亮
+    updateProgressOnSelection(); // 监听选择，更新进度
+};
+
+// resetProgressBar
+function resetProgressBar() {
+    const progressElement = document.getElementById('progress');
+    progressElement.style.width = '0%'; // 初始化进度条
+}
+
+// updateProgressOnSelection
+function updateProgressOnSelection() {
+    const totalQuestions = document.querySelectorAll('.question').length; // 获取总问题数
+    const radios = document.querySelectorAll('input[type="radio"]');
+    const progressElement = document.getElementById('progress');
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            let answeredQuestions = 0;
+            const radioGroups = new Set();
+
+            // 遍历所有单选按钮并记录已回答问题的数量
+            radios.forEach(r => {
+                if (r.checked) {
+                    radioGroups.add(r.name); // 通过name属性判断是哪个问题
+                }
+            });
+
+            answeredQuestions = radioGroups.size;
+
+            // 更新进度条百分比
+            const progressPercentage = (answeredQuestions / totalQuestions) * 100;
+            progressElement.style.width = `${progressPercentage}%`;
+
+            // 保存用户进度和选择到 sessionStorage
+            saveProgressToStorage();
+        });
+    });
+}
+
+// highlightSelected
+function highlightSelected() {
+    const radios = document.querySelectorAll('input[type="radio"]');
+    radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            const labels = this.closest('.scale').querySelectorAll('label');
+            labels.forEach(label => label.classList.remove('highlight')); // 清除高亮
+            this.parentNode.classList.add('highlight'); // 高亮选中的选项
+        });
+    });
+}
+
+// 保存用户选择和进度到 sessionStorage
+function saveProgressToStorage() {
+    const radios = document.querySelectorAll('input[type="radio"]');
+    const selectedValues = {};
+
+    radios.forEach(radio => {
+        if (radio.checked) {
+            selectedValues[radio.name] = radio.value; // 保存每个问题的选择值
+        }
+    });
+
+    // 保存到 sessionStorage
+    sessionStorage.setItem('quizProgress', JSON.stringify(selectedValues));
+}
+
+// 从 sessionStorage 恢复用户进度和选择，并确保高亮
+function restoreProgressFromStorage() {
+    const savedProgress = sessionStorage.getItem('quizProgress');
+
+    if (savedProgress) {
+        const selectedValues = JSON.parse(savedProgress);
+
+        // 恢复每个问题的选择，并确保高亮
+        for (const name in selectedValues) {
+            const value = selectedValues[name];
+            const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+            if (radio) {
+                radio.checked = true;
+                // 这里同时添加高亮逻辑
+                const labels = radio.closest('.scale').querySelectorAll('label');
+                labels.forEach(label => label.classList.remove('highlight')); // 清除高亮
+                radio.parentNode.classList.add('highlight'); // 高亮选中的选项
+            }
+        }
+
+        // 更新进度条
+        updateProgressBar();
+    }
+}
+
+// 更新进度条显示
+function updateProgressBar() {
+    const totalQuestions = document.querySelectorAll('.question').length;
+    const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+    const progressPercent = (answeredQuestions / totalQuestions) * 100;
+    document.getElementById('progress').style.width = progressPercent + '%';
+}
+
+// 监听表单提交
+document.getElementById('quizForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    calculatePersonalityScores();
+});
+
+// 监听单选按钮的改变，实时更新进度条
+document.querySelectorAll('input[type="radio"]').forEach((input) => {
+    input.addEventListener('change', updateProgressBar);
+});
+
+</script>
+
+
+<script>
+
+    // Calculate scores and redirect to appropriate page
     function calculatePersonalityScores() {
-        // Get all the radio button values (assuming the form has radio buttons with name attributes like 'extraversion1', 'agreeableness1', etc.)
         const extraversion1 = parseInt(document.querySelector('input[name="extraversion1"]:checked').value);
-        const extraversion2 = parseInt(document.querySelector('input[name="extraversion2"]:checked').value); // reverse-scored
-
+        const extraversion2 = parseInt(document.querySelector('input[name="extraversion2"]:checked').value);
         const agreeableness1 = parseInt(document.querySelector('input[name="agreeableness1"]:checked').value);
-        const agreeableness2 = parseInt(document.querySelector('input[name="agreeableness2"]:checked').value); // reverse-scored
-
+        const agreeableness2 = parseInt(document.querySelector('input[name="agreeableness2"]:checked').value);
         const conscientiousness1 = parseInt(document.querySelector('input[name="conscientiousness1"]:checked').value);
-        const conscientiousness2 = parseInt(document.querySelector('input[name="conscientiousness2"]:checked').value); // reverse-scored
-
+        const conscientiousness2 = parseInt(document.querySelector('input[name="conscientiousness2"]:checked').value);
         const neuroticism1 = parseInt(document.querySelector('input[name="neuroticism1"]:checked').value);
         const neuroticism2 = parseInt(document.querySelector('input[name="neuroticism2"]:checked').value); // reverse-scored
-
         const openness1 = parseInt(document.querySelector('input[name="openness1"]:checked').value);
         const openness2 = parseInt(document.querySelector('input[name="openness2"]:checked').value); // reverse-scored
 
-        // Reverse score function: reverse the score for reverse-scored items
         function reverseScore(score) {
-            return 6 - score; // Reverse a score on a scale from 1 to 5
+            return 6 - score;
         }
 
-        // Calculate the scores for each trait
         const extraversionScore = extraversion1 + reverseScore(extraversion2);
         const agreeablenessScore = agreeableness1 + reverseScore(agreeableness2);
         const conscientiousnessScore = conscientiousness1 + reverseScore(conscientiousness2);
         const neuroticismScore = neuroticism1 + reverseScore(neuroticism2);
         const opennessScore = openness1 + reverseScore(openness2);
 
-        // Store the scores in an object
         const scores = {
             extraversion: extraversionScore,
             agreeableness: agreeablenessScore,
@@ -256,19 +515,17 @@
             openness: opennessScore
         };
 
-        // Find the personality trait with the highest score
         const highestTrait = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
-        // Redirect the user to a different page based on the highest personality score
         switch (highestTrait) {
             case "extraversion":
-                window.location.href = "extraversion_page_1.html"; // Redirect to the page for Extraversion
+                window.location.href = "extraversion_page_1.html";
                 break;
             case "agreeableness":
-                window.location.href = "agreeableness_page_1.html"; // Redirect to the page for Agreeableness
+                window.location.href = "agreeableness_page_1.html";
                 break;
             case "conscientiousness":
-                window.location.href = "conscientiousness_page_1.html"; // Redirect to the page for Conscientiousness
+                window.location.href = "conscientiousness_page_1.html";
                 break;
             case "neuroticism":
                 window.location.href = "neuroticism_page_1.html"; // Redirect to the page for Neuroticism
@@ -277,14 +534,18 @@
                 window.location.href = "openness_page_1.html"; // Redirect to the page for Openness
                 break;
             default:
-                alert("Unable to determine the highest trait."); // Fallback if no trait is highest
+                alert("Unable to determine highest trait.");
         }
     }
 
-    // Call the function when the form is submitted
-    document.getElementById("quizForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent form from submitting normally
-        calculatePersonalityScores(); // Calculate the scores and redirect to the relevant page
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        calculatePersonalityScores();
+    });
+
+    // Add change event listener to radio buttons for progress bar
+    document.querySelectorAll('input[type="radio"]').forEach((input) => {
+        input.addEventListener('change', updateProgressBar);
     });
 </script>
 
