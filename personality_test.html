@@ -38,14 +38,7 @@
         nav a:hover {
             background-color: #45a049;
         }
-        .container {
-            width: 60%;
-            margin: 50px auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+
         h2 {
             margin-bottom: 20px;
         }
@@ -507,15 +500,37 @@ document.querySelectorAll('input[type="radio"]').forEach((input) => {
         const neuroticismScore = neuroticism1 + reverseScore(neuroticism2);
         const opennessScore = openness1 + reverseScore(openness2);
 
-        const scores = {
-            extraversion: extraversionScore,
-            agreeableness: agreeablenessScore,
-            conscientiousness: conscientiousnessScore,
-            neuroticism: neuroticismScore,
-            openness: opennessScore
+        // caculate total points 
+        const totalScore = extraversionScore + agreeablenessScore + conscientiousnessScore + neuroticismScore + opennessScore;
+
+        
+        const extraversionPercentage = parseFloat(((extraversionScore / totalScore) * 100).toFixed(2));
+        const agreeablenessPercentage = parseFloat(((agreeablenessScore / totalScore) * 100).toFixed(2));
+        const conscientiousnessPercentage = parseFloat(((conscientiousnessScore / totalScore) * 100).toFixed(2));
+        const neuroticismPercentage = parseFloat(((neuroticismScore / totalScore) * 100).toFixed(2));
+        const opennessPercentage = parseFloat(((opennessScore / totalScore) * 100).toFixed(2));
+
+        // const scores = {
+        //     extraversion: extraversionScore,
+        //     agreeableness: agreeablenessScore,
+        //     conscientiousness: conscientiousnessScore,
+        //     neuroticism: neuroticismScore,
+        //     openness: opennessScore
+        // };
+
+        const percentageScores = {
+            extraversion: extraversionPercentage,
+            agreeableness: agreeablenessPercentage,
+            conscientiousness: conscientiousnessPercentage,
+            neuroticism: neuroticismPercentage,
+            openness: opennessPercentage
         };
 
-        const highestTrait = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        // 将分数保存到 sessionStorage 中
+        sessionStorage.setItem('personalityPercentages', JSON.stringify(percentageScores));
+
+        // const highestTrait = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        const highestTrait = Object.keys(percentageScores).reduce((a, b) => percentageScores[a] > percentageScores[b] ? a : b);
 
         switch (highestTrait) {
             case "extraversion":
