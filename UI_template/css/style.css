@@ -74,6 +74,117 @@ canvas {
   width: 50% !important;
   height: auto !important;
 }
+/* css for test */
+
+#progress-bar {
+  width: 100%;
+  background-color: #ddd;
+  margin-bottom: 20px;
+}
+#progress {
+  height: 20px;
+  background-color: #4CAF50;
+  width: 0%;
+}
+#form {
+  display: flex;
+  flex-direction: column;
+}
+.question {
+  margin-bottom: 50px;
+}
+.question-label {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"]:checked + label {
+  background-color: #d4edda;
+}
+.quizcontainer {
+  width: 60%;
+  margin: 80px auto; /* 增加顶部空隙，以避免与固定进度条重叠 */
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 500px; /* 固定容器高度 */
+  overflow-y: scroll; /* 添加垂直滚动 */
+}
+.highlight {
+  background-color: #d4edda;
+  border-color: #28a745;
+  font-weight: bold;
+  }
+#form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+#form button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+.scale {
+  display: flex;
+  justify-content: space-around;
+}
+.scale label {
+  margin: 0 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  flex-grow: 1;
+  text-align: center;
+  cursor: pointer;
+}
+.scale-description {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+/* interactive design */
+@media (max-width: 768px) {
+  .quizcontainer {
+      width: 90%;
+      padding: 20px;
+  }
+  .quiz-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .quiz-nav a {
+      margin-bottom: 10px;
+      width: 100%;
+      text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .scale {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .scale label {
+      margin-bottom: 10px;
+  }
+  #quiz header {
+      padding: 10px;
+  }
+  .quizcontainer {
+      padding: 10px;
+  }
+}
 /* End */
 
 #page {
