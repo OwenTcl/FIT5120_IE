@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fist Tracking Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        #settingsContainer {
+            background-color: #d88b8b;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #settingsContainer label,
+        #settingsContainer input {
+            margin: 0 5px;
+        }
+
+        #difficultySelection {
+            background-color: #f56262;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #7eae59;
+            color: white;
+            cursor: pointer;
+        }
+
+        .game-container {
+            background-color: #ccc;
+            position: relative;
+            width: 640px;
+            height: 480px;
+            margin-bottom: 10px;
+        }
+
+        video, canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        /* Flip the video feed horizontally to remove mirroring */
+        video {
+            z-index: 1;
+            transform: scaleX(-1); /* Flip video horizontally */
+        }
+
+        /* Make sure canvas stays on top of video and does not block interactions */
+        canvas {
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        #score, #timer {
+            font-size: 24px;
+            position: absolute;
+            z-index: 2;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        #score {
+            top: 10px;
+            left: 10px;
+        }
+
+        #timer {
+            top: 50px;
+            left: 10px;
+        }
+
+        #result {
+            background-color: #7f7fe9;
+            padding: 10px;
+            text-align: center;
+            display: none;
+            width: 640px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Lets play!!</h1>
+
+    <div id="settingsContainer">
+        <label for="timeLimit">Set Time Limit (seconds):</label>
+        <input type="number" id="timeLimit" value="60" min="10" max="300" step="10">
+
+        <label for="ballsLimit">Set Balls Limit:</label>
+        <input type="number" id="ballsLimit" value="20" min="5" max="100">
+    </div>
+
+    <div id="difficultySelection">
+        <span>Select difficulty</span>
+        <button id="easyButton">Easy</button>
+        <button id="normalButton">Normal</button>
+        <button id="hardButton">Hard</button>
+    </div>
+
+    <div>
+        <button id="startButton">Start Game</button>
+        <button id="stopButton" style="display:none;">Stop Game</button>
+    </div>
+
+    <div class="game-container">
+        <div id="score">Score: 0</div>
+        <div id="timer">Time: 0.00s</div>
+        <video id="webcam" autoplay playsinline width="640" height="480"></video>
+        <canvas id="gameCanvas" width="640" height="480"></canvas>
+    </div>
+
+    <div id="result">Game Over!</div>
+
+    <!-- TensorFlow.js and Hand Pose Detection Model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
+
+    <!-- Main Game Script -->
+    <script src="game_script.js"></script>
+</body>
+</html>
