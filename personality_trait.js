@@ -18,6 +18,23 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+        // Create an empty array to store the values for sorting
+        let arrsub = [];
+
+        // Push all the values in suburbs set into the array
+        for (let suburb of suburbs){
+            arrsub.push(suburb);
+        }
+
+        // Sort the array and clear the old set
+        arrsub.sort();
+        suburbs.clear();
+
+        // Add back all the sorted value into the set
+        for (let suburb of arrsub){
+            suburbs.add(suburb);
+        }
+
         // Populate the dropdown with the suburb names
         suburbs.forEach(suburb => {
             const option = document.createElement('option');
