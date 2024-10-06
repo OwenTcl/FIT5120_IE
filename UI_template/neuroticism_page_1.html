@@ -10,7 +10,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Personality Results &mdash;</title>
 	<link rel="icon" type="image/x-icon" href="LogoDraft.png">
-	<script src="js/personality_trait.js" defer></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="elder, isolation" />
 	<meta name="author" content="TA14" />
@@ -32,6 +31,10 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+
+	<!-- Suburb searching JS -->
+	<script src="js/personality_trait.js" defer></script>
+
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -96,7 +99,7 @@
 	
 
 	<div id="fh5co-blog" class="fh5co-bg-section">
-		<div class="container">
+		<!-- <div class="container">
 			<div class="row animate-box row-pb-md" data-animate-effect="fadeInUp">
 				<div class="col-md-8 col-md-offset-2 text-left fh5co-heading">
 					<h2>Your main personalty is:</h2>
@@ -104,104 +107,110 @@
 				</div>
 			</div>
 
-			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- 引入插件 -->
-			<canvas id="personalityChart" width="400" height="100"></canvas>
-
-			<script>
-				// read sessionStorage data to generate bar chart
-				window.onload = function() {
-					const percentages = JSON.parse(sessionStorage.getItem('personalityPercentages'));
-		
-					if (percentages) 
-					{
-						const ctx = document.getElementById('personalityChart').getContext('2d');
-						const chart = new Chart(ctx, {
-							type: 'bar', // 使用柱状图类型
-							data: 
-							{
-								labels: ['Extraversion', 'Agreeableness', 'Conscientiousness', 'Neuroticism', 'Openness'],
-								datasets: [{
-									label: 'Personality Traits Percentage',
-									data: [percentages.extraversion, percentages.agreeableness, percentages.conscientiousness, percentages.neuroticism, percentages.openness],
-									backgroundColor: [
-										'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)',
-										'rgba(255, 206, 86, 0.2)',
-										'rgba(75, 192, 192, 0.2)',
-										'rgba(153, 102, 255, 0.2)'
-									],
-									borderColor: [
-										'rgba(255, 99, 132, 1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(255, 206, 86, 1)',
-										'rgba(75, 192, 192, 1)',
-										'rgba(153, 102, 255, 1)'
-									],
-									borderWidth: 1
-								}]
-							},
-							options: 
-							{
-								plugins: {
-									datalabels: {
-										anchor: 'end', // 标签的位置
-										align: 'end',  // 标签的对齐方式
-										formatter: (value) => value + '%', // 显示百分比
-										color: '#000', // 标签颜色
-										font: {
-											weight: 'bold'
-										}
-									}
-								},
-								scales: 
-								{
-									x: {
-										barThickness: 'flex',
-										maxBarThickness: 40 // 设置最大柱子宽度
-									},
-									y: {
-										beginAtZero: true,
-										max: 100,
-										ticks: 
-										{
-											callback: function(value) {
-												return value + "%"; // y轴显示百分比
-											}
-										}
-									}
-								}
-							},
-							plugins: [ChartDataLabels] // 启用 datalabels 插件
-						});
-					} else {
-						alert('No personality percentage data available.');
-					}
-				};
-		
-			</script>
-
-				<!-- Personality Description Section -->
-				<div class="result-section personality-description">
-					<h3>Neuroticism</h3>
-					<p id="personalityDescription">
-						People high in neuroticism are often more sensitive to stress and anxiety.
-						They might seek recreational activities that help them relax, manage stress, or provide a sense of control.
-					</p>
-				</div>
-			
-				<div class="result-section recommended-activities">
-					<h2>Select your suburb to find activities in your area:</h2>
-					<select id="suburbDropdown">
-						<option value="" disabled selected>Select your suburb</option>
-					</select>
-					<button id="submitSuburb">Submit</button>
-				</div>
 			
 				
 				<div class="clearfix visible-md-block"></div>
 
 
+		
+		</div> -->
+		<div class="container">
+			<!-- Personality Type Section -->
+			<div class="result-section personality-title">
+				<h2>Your Main Personality is:</h2>
+				<h1 id="personalityType">Neuroticism</h1>
+			</div>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- 引入插件 -->
+			<canvas id="personalityChart" width="400" height="100"></canvas>
+			<script>
+			// read sessionStorage data to generate bar chart
+			window.onload = function() {
+				const percentages = JSON.parse(sessionStorage.getItem('personalityPercentages'));
+		
+				if (percentages) 
+				{
+					const ctx = document.getElementById('personalityChart').getContext('2d');
+					const chart = new Chart(ctx, {
+						type: 'bar', // 使用柱状图类型
+						data: 
+						{
+							labels: ['Extraversion', 'Agreeableness', 'Conscientiousness', 'Neuroticism', 'Openness'],
+							datasets: [{
+								label: 'Personality Traits Percentage',
+								data: [percentages.extraversion, percentages.agreeableness, percentages.conscientiousness, percentages.neuroticism, percentages.openness],
+								backgroundColor: [
+									'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(255, 206, 86, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)'
+								],
+								borderColor: [
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)'
+								],
+								borderWidth: 1
+							}]
+						},
+						options: 
+						{
+							plugins: {
+								datalabels: {
+									anchor: 'end', // 标签的位置
+									align: 'end',  // 标签的对齐方式
+									formatter: (value) => value + '%', // 显示百分比
+									color: '#000', // 标签颜色
+									font: {
+										weight: 'bold'
+									}
+								}
+							},
+							scales: 
+							{
+								x: {
+									barThickness: 'flex',
+									maxBarThickness: 40 // 设置最大柱子宽度
+								},
+								y: {
+									beginAtZero: true,
+									max: 100,
+									ticks: 
+									{
+										callback: function(value) {
+											return value + "%"; // y轴显示百分比
+										}
+									}
+								}
+							}
+						},
+						plugins: [ChartDataLabels] // 启用 datalabels 插件
+					});
+				} else {
+					alert('No personality percentage data available.');
+				}
+			};
+		
+			</script>
+		
+			<!-- Personality Description Section -->
+			<div class="result-section personality-description">
+				<h3>Neuroticism</h3>
+				<p id="personalityDescription">
+					People high in neuroticism are often more sensitive to stress and anxiety.
+					They might seek recreational activities that help them relax, manage stress, or provide a sense of control.
+				</p>
+			</div>
+		
+			<div class="result-section recommended-activities">
+				<h2>Select your suburb to find activities in your area:</h2>
+				<select id="suburbDropdown">
+					<option value="" disabled selected>Select your suburb</option>
+				</select>
+				<button id="submitSuburb">Submit</button>
 			</div>
 		</div>
 	</div>
