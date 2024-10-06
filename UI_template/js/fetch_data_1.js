@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchActivitiesInSuburb(suburb, personality);
 
     // Load the CSV file using PapaParse
-    Papa.parse('people_counts_by_category.csv', {
+    Papa.parse('csv/people_counts_by_category.csv', {
         download: true,
         header: true,
         complete: function(results) {
