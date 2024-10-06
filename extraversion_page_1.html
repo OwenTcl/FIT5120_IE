@@ -1,130 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="personality_traits_style.css">
-    <script src="personality_trait.js" defer></script>
-    <title>Personality Results</title>
-    <link rel="icon" type="image/x-icon" href="LogoDraft.png">
-</head>
-<body>
+<!DOCTYPE HTML>
+<!--
+	Concept by gettemplates.co
+	Twitter: http://twitter.com/gettemplateco
+	URL: http://gettemplates.co
+-->
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Personality Results &mdash;</title>
+	<link rel="icon" type="image/x-icon" href="LogoDraft.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="elder, isolation" />
+	<meta name="author" content="TA14" />
 
-<header>
-    <div class="logo">
-        <a href="home.html"><img src="LogoDraft.png" class="logo" width="80" height="80"></a>
-        <h1>ElderIsolation</h1>
-    </div>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
 
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="info.html">Info</a>
-        <a href="personality_test.html">Find Hobby</a>
-        <a href="all_personalities_activities.html">Browse</a>
-    </nav>
-</header>
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
 
-<div class="container">
-    <!-- Personality Type Section -->
-    <div class="result-section personality-title">
-        <h2>Your Main Personality is:</h2>
-        <h1 id="personalityType">Extroversion</h1>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- 引入插件 -->
-    <canvas id="personalityChart" width="400" height="100"></canvas>
-     <script>
-        // read sessionStorage data to generate bar chart
-        window.onload = function() {
-            const percentages = JSON.parse(sessionStorage.getItem('personalityPercentages'));
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/stylePersonalityResult.css">
 
-            if (percentages) 
-            {
-                const ctx = document.getElementById('personalityChart').getContext('2d');
-                const chart = new Chart(ctx, {
-                    type: 'bar', // 使用柱状图类型
-                    data: 
-                    {
-                        labels: ['Extraversion', 'Agreeableness', 'Conscientiousness', 'Neuroticism', 'Openness'],
-                        datasets: [{
-                            label: 'Personality Traits Percentage',
-                            data: [percentages.extraversion, percentages.agreeableness, percentages.conscientiousness, percentages.neuroticism, percentages.openness],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: 
-                    {
-                        plugins: {
-                            datalabels: {
-                                anchor: 'end', // 标签的位置
-                                align: 'end',  // 标签的对齐方式
-                                formatter: (value) => value + '%', // 显示百分比
-                                color: '#000', // 标签颜色
-                                font: {
-                                    weight: 'bold'
-                                }
-                            }
-                        },
-                        scales: 
-                        {
-                            x: {
-                                barThickness: 'flex',
-                                maxBarThickness: 40 // 设置最大柱子宽度
-                            },
-                            y: {
-                                beginAtZero: true,
-                                max: 100,
-                                ticks: 
-                                {
-                                    callback: function(value) {
-                                        return value + "%"; // y轴显示百分比
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    plugins: [ChartDataLabels] // 启用 datalabels 插件
-                });
-            } else {
-                alert('No personality percentage data available.');
-            }
-        };
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
 
-    </script>
+	<!-- Suburb searching JS -->
+	<script src="js/personality_trait.js" defer></script>
 
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 
-    <!-- Personality Description Section -->
-    <div class="result-section personality-description">
-        <h3>Extroversion</h3>
-        <p id="personalityDescription">
-            Extraverted individuals are sociable, energetic, and thrive in environments with lots of interaction.
-            They are likely to specialize in recreational activities that involve socializing, excitement, and high energy.
-        </p>
-    </div>
+	</head>
+	<body>
+		
+	<!-- Navigation Bar -->
+	<div class="fh5co-loader"></div>
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="logo">
+				<a href="index.html"><img src="images/LogoDraft.png" class="logo" width="80" height="80"></a>
+			</div>
+			<div class="row">
+				<div class="col-xs-2 text-left">
+					<div id="fh5co-logo"><a href="index.html">ElderIsolation</a></div>
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<!-- <li class="has-dropdown">
+							<a href="services.html">Services</a>
+							<ul class="dropdown">
+								<li><a href="#">Web Design</a></li>
+								<li><a href="#">eCommerce</a></li>
+								<li><a href="#">Branding</a></li>
+								<li><a href="#">API</a></li>
+							</ul>
+						</li> -->
+						<li><a href="personality_quiz.html">Find Hobbies</a></li>
+						<!-- class="active" to make the nav button show as red to indicate user they are on this page -->
+						<li class="active"><a href="all_personalities_and_activities.html">Browse</a></li>
+						<li><a href="game.html">Game</a></li>
+						<li><a href="contact.html">Epic 5</a></li>
+						<li><a href="#">Epic 6</a></li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- The END of Navigation Bar -->
 
-    <div class="result-section recommended-activities">
-        <h2>Select your suburb to find activities in your area:</h2>
-        <select id="suburbDropdown">
-            <option value="" disabled selected>Select your suburb</option>
-        </select>
-        <button id="submitSuburb">Submit</button>
-    </div>
+	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_1.jpg);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 text-left">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeInUp">
+							<h1 class="mb30">Personality Results</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 
+	
 
-</div>
-</body>
+	<div id="fh5co-blog" class="fh5co-bg-section">
+		<div class="container">
+			<!-- Personality Type Section -->
+			<div class="result-section personality-title">
+				<h2>Your Main Personality is:</h2>
+				<h1 id="personalityType">Extraversion</h1>
+			</div>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- 引入插件 -->
+			<canvas id="personalityChart" width="400" height="100"></canvas>
+			<!-- Personality Chart JS -->
+			<script src="js/personality_chart.js" defer></script>
+		
+			<!-- Personality Description Section -->
+			<div class="result-section personality-description">
+				<h3>Extraversion</h3>
+				<p id="personalityDescription">
+					Extraverted individuals are sociable, energetic, and thrive in environments with lots of interaction.
+					They are likely to specialize in recreational activities that involve socializing, excitement, and high energy.
+				</p>
+			</div>
+		
+			<div class="result-section recommended-activities">
+				<h2>Select your suburb to find activities in your area:</h2>
+				<select id="suburbDropdown">
+					<option value="" disabled selected>Select your suburb</option>
+				</select>
+				<button id="submitSuburb">Submit</button>
+			</div>
+		</div>
+	</div>
+
+	
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-4 fh5co-widget ">
+					<h3>ElderIsolation</h3>
+					<p>Website dedicate for Elders in Melborne who may feels social isolated or alone</p>
+					<p><a href="#">Learn More</a></p>
+				</div>
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 ">
+					<ul class="fh5co-footer-links">
+						<li><a href="#">About</a></li>
+						<li><a href="#">Help</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">Teams</a></li>
+						<!-- <li><a href="#">Meetups</a></li> -->
+					</ul>
+				</div>
+				<div class="row copyright">
+					<div class="col-md-12 text-center">
+						<p>
+							<small class="block">&copy; 2024 TA14. All Rights Reserved.</small> 
+							<small class="block">Designed by <a href="http://gettemplates.co/" target="_blank">GetTemplates.co</a> Demo Images: <a href="http://pixeden.com/" target="_blank">Pixeden</a> &amp; <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- countTo -->
+	<script src="js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Stellar -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	</body>
 </html>
+
