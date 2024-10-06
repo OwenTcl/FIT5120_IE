@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="personality_traits_style.css">
-    <script src="personality_trait.js" defer></script>
-    <title>Personality Results</title>
-    <link rel="icon" type="image/x-icon" href="LogoDraft.png">
-</head>
-<body>
-
-<header>
-    <div class="logo">
-        <a href="home.html"><img src="LogoDraft.png" class="logo" width="80" height="80"></a>
-        <h1>ElderIsolation</h1>
-    </div>
-
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="info.html">Info</a>
-        <a href="personality_test.html">Find Hobby</a>
-        <a href="all_personalities_activities.html">Browse</a>
-    </nav>
-</header>
-
-<div class="container">
-    <!-- Personality Type Section -->
-    <div class="result-section personality-title">
-        <h2>Your Main Personality is:</h2>
-        <h1 id="personalityType">Neuroticism</h1>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- 引入插件 -->
-    <canvas id="personalityChart" width="400" height="100"></canvas>
-    <script>
-    // read sessionStorage data to generate bar chart
+// read sessionStorage data to generate bar chart
     window.onload = function() {
         const percentages = JSON.parse(sessionStorage.getItem('personalityPercentages'));
 
@@ -103,26 +67,3 @@
             alert('No personality percentage data available.');
         }
     };
-
-    </script>
-
-    <!-- Personality Description Section -->
-    <div class="result-section personality-description">
-        <h3>Neuroticism</h3>
-        <p id="personalityDescription">
-            People high in neuroticism are often more sensitive to stress and anxiety.
-            They might seek recreational activities that help them relax, manage stress, or provide a sense of control.
-        </p>
-    </div>
-
-    <div class="result-section recommended-activities">
-        <h2>Select your suburb to find activities in your area:</h2>
-        <select id="suburbDropdown">
-            <option value="" disabled selected>Select your suburb</option>
-        </select>
-        <button id="submitSuburb">Submit</button>
-    </div>
-</div>
-
-</body>
-</html>
