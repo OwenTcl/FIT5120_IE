@@ -8,7 +8,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Personality Results &mdash;</title>
+	<title>About&mdash;</title>
 	<link rel="icon" type="image/x-icon" href="LogoDraft.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="elder, isolation" />
@@ -27,14 +27,10 @@
 	<link rel="stylesheet" href="css/magnific-popup.css">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/stylePersonalityResult.css">
+	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
-
-	<!-- Suburb searching JS -->
-	<script src="js/personality_trait.js" defer></script>
-
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -42,8 +38,7 @@
 
 	</head>
 	<body>
-		
-	<!-- Navigation Bar -->
+<!-- Navigation Bar -->
 	<div class="fh5co-loader"></div>
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
@@ -67,8 +62,7 @@
 							</ul>
 						</li>
 						<li><a href="personality_quiz.html">Find Hobbies</a></li>
-						<!-- class="active" to make the nav button show as red to indicate user they are on this page -->
-						<li class="active"><a href="all_personalities_and_activities.html">Browse</a></li>
+						<li><a href="all_personalities_and_activities.html">Browse</a></li>
 					</ul>
 				</div>
 			</div>
@@ -77,14 +71,14 @@
 	</nav>
 	<!-- The END of Navigation Bar -->
 
-	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/pic1.jpg);" data-stellar-background-ratio="0.5">
+	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_1.jpg);" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7 text-left">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeInUp">
-							<h1 class="mb30">Personality Results</h1>
+							<h1 class="mb30">About Us</h1>
 						</div>
 					</div>
 				</div>
@@ -94,37 +88,74 @@
 
 	
 
-	<div id="fh5co-blog" class="fh5co-bg-section">
+	<div id="fh5co-team">
 		<div class="container">
-			<!-- Personality Type Section -->
-			<div class="result-section personality-title">
-				<h2>Your Main Personality is:</h2>
-				<h1 id="personalityType">Neuroticism</h1>
+			<div class="row animate-box row-pb-md">
+				<div class="col-md-8 col-md-offset-2 text-left fh5co-heading">
+					<span>TA14</span>
+					<h2>Meet Our Team member</h2>
+					<p>WE are a team aiming to bring quality education for elderly</p>
+				</div>
 			</div>
-			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- 引入插件 -->
-			<canvas id="personalityChart" width="400" height="100"></canvas>
-			<script src="js/personality_chart.js" defer></script>
-		
-			<!-- Personality Description Section -->
-			<div class="result-section personality-description">
-				<h3>Neuroticism</h3>
-				<p id="personalityDescription">
-					People high in neuroticism are often more sensitive to stress and anxiety.
-					They might seek recreational activities that help them relax, manage stress, or provide a sense of control.
-				</p>
-			</div>
-		
-			<div class="result-section recommended-activities">
-				<h2>Select your suburb to find activities in your area:</h2>
-				<input type="text" id="searchSuburb" placeholder="Search for your suburb..." />
-				<select id="suburbDropdown"></select>
-				<button id="submitSuburb">Submit</button>
+			<div class="row">
+				<div class="col-md-4 col-sm-4 animate-box" data-animate-effect="fadeIn">
+					<div class="fh5co-staff">
+						<img src="images/person1.jpg">
+						<h3>Boqiao Zhao</h3>
+						<strong class="role">MBIS</strong>
+						<ul class="fh5co-social-icons">
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-github"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 animate-box" data-animate-effect="fadeIn">
+					<div class="fh5co-staff">
+						<img src="images/person2.jpg">
+						<h3>Chak Tsang</h3>
+						<strong class="role">MIT</strong>
+						<ul class="fh5co-social-icons">
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-github"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 animate-box" data-animate-effect="fadeIn">
+					<div class="fh5co-staff">
+						<img src="images/person2.jpg">
+						<h3>Hao Liang</h3>
+						<strong class="role">MIT</strong>
+						<ul class="fh5co-social-icons">
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-github"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 animate-box" data-animate-effect="fadeIn">
+					<div class="fh5co-staff">
+						<img src="images/person2.jpg">
+						<h3>Shufeng Tao</h3>
+						<strong class="role">MDS</strong>
+						<ul class="fh5co-social-icons">
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-github"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 animate-box" data-animate-effect="fadeIn">
+					<div class="fh5co-staff">
+						<img src="images/person2.jpg">
+						<h3>Sothearith Tith</h3>
+						<strong class="role">MAI</strong>
+						<ul class="fh5co-social-icons">
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-github"></i></a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
-	
 
 	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
@@ -149,6 +180,8 @@
 			</div>
 		</div>
 	</footer>
+
+
 	</div>
 
 	<div class="gototop js-top">
