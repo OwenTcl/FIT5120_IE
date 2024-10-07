@@ -52,16 +52,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log(`Personality: ${personality}, Suburb: ${suburb}`); // Debugging check
 
-    // Fetch activities based on the suburb and personality
-    fetchActivitiesInSuburb(suburb, personality);
+    // Ensure that both suburb and personality are valid
+    if (suburb && personality) {
+        // Get the relevant categories based on personality
+        const recommendedCategories = getRelevantCategories(personality);
+
+        // Load CSVs for each recommended category
+        recommendedCategories.forEach(category => {
+            loadCSVForCategory(category, suburb, personality);
+        });
+    } else {
+        console.error("Suburb or personality not found in URL parameters.");
+    }
 
     // Fetch LGA boundaries from GeoJSON file
-    fetch('map.geojson')
+    fetch('suburb-2-vic.geojson')
       .then(response => response.json())
       .then(geojson => {
           // Parse and store LGA boundaries (polygons)
           geojson.features.forEach(feature => {
-              const lgaName = feature.properties.lga_name[0];
+              const lgaName = feature.properties.vic_loca_2;
               const polygonCoordinates = feature.geometry.coordinates; // Assuming it's a polygon
 
               if (lgaName && polygonCoordinates) {
@@ -102,30 +112,50 @@ function moveToAndHighlightLGA(suburb) {
     lgaLayer.bindPopup(`<b>${suburb}</b>`).openPopup();
 }
 
-function fetchActivitiesInSuburb(suburb, personality) {
-    // Fetch facilities data from the Flask API
-    fetch('https://95alhmeubg.execute-api.ap-southeast-2.amazonaws.com/dev/maps')  // Replace with the correct API URL
-      .then(response => response.json())
-      .then(data => {
-        facilitiesData = data;
-        console.log('Facilities Data:', data);
+// Store all facilities across all categories
+let allFacilities = [];
+let visibleCategories = new Set();
 
-        // Filter the facilities based on the personality trait
-        const filteredFacilities = filterFacilitiesByPersonality(data, personality);
+function loadCSVForCategory(category, suburb, personality) {
+    // Build the CSV filename based on the category
+    const csvFileName = `category_table_${category.replace(/\s+/g, '_')}.csv`;
 
-        // Add the filtered facilities to the map
-        addFacilitiesToMap(filteredFacilities);
-      })
-      .catch(error => console.error('Error fetching facilities:', error));
+    // Load the CSV file using PapaParse
+    Papa.parse(csvFileName, {
+        download: true,
+        header: true,
+        complete: function(results) {
+            const data = results.data;
+            console.log(`Loaded data for category ${category}:`, data);
+
+            // Filter the facilities by personality and suburb
+            const { allRecommendedFacilities, facilitiesInSuburb } = filterFacilitiesByPersonality(data, suburb, personality);
+
+            // Collect all facilities globally
+            allFacilities.push(...allRecommendedFacilities);
+
+            // Add the category to the global set of visible categories
+            visibleCategories.add(category);
+
+            // Add all recommended facilities to the map
+            addFacilitiesToMap(allRecommendedFacilities);
+
+            // After all CSVs are loaded, update the legend
+            addLegend(Array.from(visibleCategories));
+        },
+        error: function(error) {
+            console.error(`Error loading ${csvFileName}:`, error);
+        }
+    });
 }
 
 // Function to filter facilities based on personality
-function filterFacilitiesByPersonality(facilities, personality) {
-    let recommendedCategories = [];
+function filterFacilitiesByPersonality(facilities, suburb, personality) {
+    let recommendedCategories = getRelevantCategories(personality);
 
     // Define recommended categories for each personality trait
     if (personality === "Extroversion") {
-        recommendedCategories = ["Social Sports", "Dancing", "Adventure Activities"];
+        recommendedCategories = ["Social_Sports", "Dancing", "Adventure_Activities"];
         document.getElementById('activityDetails').innerHTML = `
             <ul>
                 <li>Adventure activities combine nature exploration with moderate physical challenges, helping older adults interact with the outdoors while improving cardiovascular health and muscle strength. These activities also promote mental well-being.</li>
@@ -139,7 +169,7 @@ function filterFacilitiesByPersonality(facilities, personality) {
         `;
 
     } else if (personality === "Agreeableness") {
-        recommendedCategories = ["Volunteering", "Group Fitness", "Team Sports"];
+        recommendedCategories = ["Volunteering", "Group_Fitness", "Team_Sports"];
         document.getElementById('activityDetails').innerHTML = `
             <ul>
                 <li>Volunteering gives older adults the opportunity to stay active while contributing to the community, enhancing self-worth and maintaining physical and mental activity.</li>
@@ -152,7 +182,7 @@ function filterFacilitiesByPersonality(facilities, personality) {
             </ul>
         `;
     } else if (personality === "Conscientiousness") {
-        recommendedCategories = ["Organized Sports", "Crafts and Hobbies"];
+        recommendedCategories = ["Organized_Sports", "Crafts_and_Hobbies"];
         document.getElementById('activityDetails').innerHTML = `
             <ul>
                 <li>Organized sports involve structured games with set rules and teamwork, making them suitable for older adults to enjoy friendly competition while promoting physical health.</li>
@@ -162,7 +192,7 @@ function filterFacilitiesByPersonality(facilities, personality) {
             </ul>
         `;
     } else if (personality === "Neuroticism") {
-        recommendedCategories = ["Mindfulness and Relaxation", "Low-Stress Hobbies"];
+        recommendedCategories = ["Mindfulness_and_Relaxation", "Low-Stress_Hobbies"];
         document.getElementById('activityDetails').innerHTML = `
             <ul>
                 <li>Mindfulness and relaxation activities help older adults reduce anxiety and stress by focusing on balance and relaxation, enhancing mental health and overall well-being.</li>
@@ -172,7 +202,7 @@ function filterFacilitiesByPersonality(facilities, personality) {
             </ul>
         `;
     } else if (personality === "Openness to Experience") {
-        recommendedCategories = ["Artistic Pursuits", "Traveling", "Innovative Hobbies"];
+        recommendedCategories = ["Artistic_Pursuits", "Traveling", "Innovative_Hobbies"];
         document.getElementById('activityDetails').innerHTML = `
             <ul>
                 <li>Artistic pursuits offer a channel for self-expression and emotional release, helping older adults maintain cognitive function and creative thinking. These activities also encourage social interaction through art.</li>
@@ -186,38 +216,53 @@ function filterFacilitiesByPersonality(facilities, personality) {
         `;
     }
 
-    // Filter the facilities based on the recommended categories for the personality
-    return facilities.filter(facility => recommendedCategories.includes(facility.Category));
+    // Filter all facilities that match the recommended categories
+    const allRecommendedFacilities = facilities.filter(facility => {
+        return recommendedCategories.includes(facility.category.replace(/\s+/g, '_'));
+    });
+
+    // Filter facilities that are specifically in the selected suburb
+    const facilitiesInSuburb = allRecommendedFacilities.filter(facility => {
+        return facility.suburb && facility.suburb.toLowerCase() === suburb.toLowerCase();
+    });
+
+    // Return both the all recommended facilities and those in the suburb
+    return {
+        allRecommendedFacilities,
+        facilitiesInSuburb
+    };
 }
 
 // Function to add facilities to the map with colored markers based on category
 function addFacilitiesToMap(facilities) {
-    const visibleCategories = new Set(); // Track visible categories
-
     facilities.forEach(facility => {
-        const latitude = parseFloat(facility.Latitude);
-        const longitude = parseFloat(facility.Longitude);
-        const facilityName = facility.FacilityName;
-        const classification = facility.Classification;
-        const category = facility.Category;
+        const latitude = parseFloat(facility.lat);
+        const longitude = parseFloat(facility.lon);
+
+        // Check if lat/lon are valid numbers
+        if (isNaN(latitude) || isNaN(longitude)) {
+            console.log(`Invalid coordinates for facility: ${facility.name}, Lat: ${latitude}, Lon: ${longitude}`);
+            return;  // Skip this facility if coordinates are invalid
+        }
+
+        const facilityName = facility.name;
+        const category = facility.category.trim(); // Ensure category is trimmed and consistent
+        const type = facility.type;
+
+        // Debugging: Check which categories are being added
+        console.log(`Adding facility: ${facilityName}, Category: ${category}`);
 
         // Add a colored marker to the map for each facility
         L.circleMarker([latitude, longitude], {
             radius: 8,
-            fillColor: getCategoryColor(category) || 'gray', // Default color if category is not found
+            fillColor: getCategoryColor(category) || 'gray',
             color: getCategoryColor(category) || 'gray',
             weight: 2,
             opacity: 1,
             fillOpacity: 0.8
         }).addTo(map)
-          .bindPopup(`<b>${facilityName}</b><br>${classification}`);
-
-        // Add the category to the set of visible categories
-        visibleCategories.add(category);
+          .bindPopup(`<b>${facilityName}</b><br>${type}`);
     });
-
-    // Add the legend based on visible categories
-    addLegend(Array.from(visibleCategories));
 }
 
 // Function to add a dynamic legend to the map based on visible categories
@@ -229,10 +274,14 @@ function addLegend(visibleCategories) {
     }
 
     // Create a new legend
-    const legend = L.control({position: 'bottomright'});
+    const legend = L.control({ position: 'bottomright' });
 
     legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = '<h4>Legend</h4>';  // Add a title for clarity
+
+        // Debugging: Log visible categories in the legend
+        console.log('Legend Categories:', visibleCategories);
 
         // Loop through visible categories to create the legend
         visibleCategories.forEach(category => {
@@ -254,10 +303,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const personality = urlParams.get('personality');
 
     // Fetch activities based on the suburb and personality
-    fetchActivitiesInSuburb(suburb, personality);
+//    fetchActivitiesInSuburb(suburb, personality);
 
     // Load the CSV file using PapaParse
-    Papa.parse('csv/people_counts_by_category.csv', {
+    Papa.parse('people_counts_by_category.csv', {
         download: true,
         header: true,
         complete: function(results) {
@@ -286,9 +335,9 @@ document.addEventListener('DOMContentLoaded', function () {
             maleParticipation = sortedData.map(item => item.male);
             femaleParticipation = sortedData.map(item => item.female);
 
-            console.log(categories);
-            console.log(maleParticipation);
-            console.log(femaleParticipation);
+//            console.log(categories);
+//            console.log(maleParticipation);
+//            console.log(femaleParticipation);
 
             // Call the function to plot the chart with the sorted data
             plotStackedChart(categories, maleParticipation, femaleParticipation);
@@ -370,97 +419,4 @@ function plotStackedChart(categories, maleParticipation, femaleParticipation) {
         }
     });
 };
-
-//document.addEventListener('DOMContentLoaded', function () {
-//    const urlParams = new URLSearchParams(window.location.search);
-//    const personality = urlParams.get('personality');
-//
-//    // Load slideshow images based on the personality trait
-//    loadSlideshowImages(personality);
-//});
-//
-//function loadSlideshowImages(personality) {
-//    const activityImagesDiv = document.getElementById('activityImages');
-//    const folderPath = `${personality}/`; // Path to the folder for the personality trait
-//
-//    // Example: Dynamic list of image filenames for each personality (you could load this from a server too)
-//    const imageFilenames = ['activity1.jpg', 'activity2.jpg', 'activity3.jpg', 'activity4.jpg', 'activity5.jpg', 'activity6.jpg'];  // Modify this array based on actual files
-//
-//    // Clear the container in case there are existing slides
-//    activityImagesDiv.innerHTML = '';
-//
-//    // Dynamically add slides based on the number of images
-//    imageFilenames.forEach(filename => {
-//        const slideDiv = document.createElement('div');
-//        slideDiv.classList.add('slides', 'fade');
-//
-//        const imgElement = document.createElement('img');
-//        imgElement.src = folderPath + filename;
-//        imgElement.style.width = '100%';
-//
-//        slideDiv.appendChild(imgElement);
-//        activityImagesDiv.appendChild(slideDiv);
-//    });
-//
-//    // Add the navigation arrows
-//    activityImagesDiv.innerHTML += `
-//        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-//        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-//    `;
-//
-//    showSlides(1);  // Initialize the slideshow
-//}
-//
-//let slideIndex = 1;
-//let autoSlideInterval;  // To store the interval for auto-sliding
-//
-//// Function to show slides
-//function showSlides(n) {
-//    let i;
-//    let slides = document.getElementsByClassName("slides");
-//
-//    if (n > slides.length) {
-//        slideIndex = 1;
-//    }
-//    if (n < 1) {
-//        slideIndex = slides.length;
-//    }
-//
-//    for (i = 0; i < slides.length; i++) {
-//        slides[i].style.display = "none";
-//    }
-//
-//    slides[slideIndex - 1].style.display = "block";
-//}
-//
-//// Function to advance slides manually
-//function plusSlides(n) {
-//    clearInterval(autoSlideInterval);  // Stop auto-sliding when user interacts
-//    slideIndex += n;
-//    showSlides(slideIndex);
-//    startAutoSlide();  // Restart auto-sliding after manual navigation
-//}
-//
-//// Function to start auto-sliding every 3 seconds
-//function startAutoSlide() {
-//    autoSlideInterval = setInterval(function() {
-//        slideIndex++;
-//        showSlides(slideIndex);
-//    }, 3000);  // Change the slide every 3 seconds (3000ms)
-//}
-//
-//// Initialize the slideshow and start auto-sliding
-//function initSlideshow() {
-//    showSlides(slideIndex);  // Show the first slide
-//    startAutoSlide();        // Start auto-sliding
-//}
-//
-//// Call the initialization function after loading the images
-//document.addEventListener('DOMContentLoaded', function () {
-//    const urlParams = new URLSearchParams(window.location.search);
-//    const personality = urlParams.get('personality');
-//
-//    loadSlideshowImages(personality);  // Load images based on personality
-//    initSlideshow();                   // Initialize the slideshow
-//});
 
