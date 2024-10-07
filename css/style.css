@@ -229,8 +229,8 @@ h1 {
 .game-container {
   background-color: #ccc;
   position: relative;
-  width: 720px;
-  height: 420px;
+  width: 1024px;
+  height: 768px;
   margin-bottom: 10px;
 }
 
