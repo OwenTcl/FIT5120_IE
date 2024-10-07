@@ -220,9 +220,11 @@ h1 {
 }
 
 .highlighted {
-  background-color: #7eae59;
-  font-weight: bold;
-  }
+  background-color: #ffcc00 !important; /* Example highlight color */
+  border: 2px solid #ffcc00 !important; /* Add border */
+  color: black !important; /* Adjust text color */
+  font-weight: bold !important;
+}
 
 .game-container {
   background-color: #ccc;
