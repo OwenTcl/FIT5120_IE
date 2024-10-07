@@ -3,7 +3,7 @@ const gameCanvas = document.getElementById('gameCanvas');
 const ctx = gameCanvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 const startButton = document.getElementById('startButton');
-const pauseButton = document.getElementById('pauseButton');
+//const pauseButton = document.getElementById('pauseButton');
 const stopButton = document.getElementById('stopButton');
 const resultDiv = document.getElementById('result');
 const timerElement = document.getElementById('timer');
@@ -236,6 +236,9 @@ hardButton.addEventListener('click', () => {
 highlightButton(easyButton);
 
 startButton.addEventListener('click', () => {
+    // Display an alert to warn the user
+    alert("The game is about to start. Please ensure you have sufficient space around you, remain mindful of your surroundings, and avoid movements that exceed your comfort or physical abilities.");
+
     gameStarted = true;
     startButton.style.display = 'none';
 //    pauseButton.style.display = 'block';
