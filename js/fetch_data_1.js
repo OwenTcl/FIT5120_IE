@@ -118,7 +118,7 @@ let visibleCategories = new Set();
 
 function loadCSVForCategory(category, suburb, personality) {
     // Build the CSV filename based on the category
-    const csvFileName = `category_table_${category.replace(/\s+/g, '_')}.csv`;
+    const csvFileName = `csv/category_table_${category.replace(/\s+/g, '_')}.csv`;
 
     // Load the CSV file using PapaParse
     Papa.parse(csvFileName, {
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
 //    fetchActivitiesInSuburb(suburb, personality);
 
     // Load the CSV file using PapaParse
-    Papa.parse('people_counts_by_category.csv', {
+    Papa.parse('csv/people_counts_by_category.csv', {
         download: true,
         header: true,
         complete: function(results) {
