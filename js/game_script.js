@@ -112,7 +112,8 @@ function updateGame() {
         if (hands.length > 0) {
             const hand = hands[0].keypoints;
             const indexFingerTip = hand[8];
-            const fingerX = indexFingerTip.x;
+            // Flip the X-coordinate for correct hit detection in the mirrored view
+            const fingerX = gameCanvas.width - indexFingerTip.x; // Mirrored X-coordinate
             const fingerY = indexFingerTip.y;
 
             balls.forEach((ball, index) => {

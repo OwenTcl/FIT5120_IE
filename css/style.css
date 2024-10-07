@@ -236,18 +236,18 @@ video, canvas {
   position: absolute;
   top: 0;
   left: 0;
+  transform: scaleX(-1); /* Flip only the video horizontally */
 }
 /* Flip the video feed horizontally to remove mirroring */
 #video {
   z-index: 1;
-  transform: scaleX(-1); /* Flip video horizontally */
+  transform: scaleX(-1); /* Flip only the video horizontally */
 }
 
 /* Make sure canvas stays on top of video and does not block interactions */
 #gameCanvas{
   z-index: 2;
   pointer-events: none;
-  transform: scaleX(-1); /* Flip video horizontally */
 }
 
 #score, #timer {
