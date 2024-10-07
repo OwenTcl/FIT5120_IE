@@ -236,9 +236,26 @@ hardButton.addEventListener('click', () => {
 
 highlightButton(easyButton);
 
+// Function to validate input and set a default value if invalid
+function validateInput(inputElement, minValue, maxValue, defaultValue) {
+    const value = parseInt(inputElement.value, 10);
+
+    // If the input is not a valid number or is out of bounds, use the default value
+    if (isNaN(value) || value < minValue || value > maxValue) {
+        alert(`Invalid input! Setting to default value: ${defaultValue}`);
+        inputElement.value = defaultValue;  // Set to default value
+        return defaultValue;
+    }
+    return value;
+}
+
 startButton.addEventListener('click', () => {
     // Display an alert to warn the user
     alert("The game is about to start. Please ensure you have sufficient space around you, remain mindful of your surroundings, and avoid movements that exceed your comfort or physical abilities.");
+
+    // Validate inputs
+    timeLimit = validateInput(timeLimitInput, 10, 300, 60);  // Time limit between 10 and 300 seconds, default is 60
+    ballsLimit = validateInput(ballsLimitInput, 5, 100, 20); // Balls limit between 5 and 100, default is 20
 
     gameStarted = true;
     startButton.style.display = 'none';
