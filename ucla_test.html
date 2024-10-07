@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<!--
+	Concept by gettemplates.co
+	Twitter: http://twitter.com/gettemplateco
+	URL: http://gettemplates.co
+-->
+<html xmlns:display="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Loneliness Detection</title>
+	<link rel="icon" type="image/x-icon" href="images/LogoDraft.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="elder, isolation" />
+	<meta name="author" content="TA14" />
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+		
+	<!-- Navigation Bar -->
+	<div class="fh5co-loader"></div>
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="logo">
+				<a href="home.html"><img src="images/LogoDraft.png" class="logo" width="80" height="80"></a>
+			</div>
+			<div class="row">
+				<div class="col-xs-2 text-left">
+					<div id="fh5co-logo"><a href="home.html">ElderIsolation</a></div>
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<ul>
+						<li><a href="home.html">Home</a></li>
+						<li class="has-dropdown">
+							<a href="#">Activities</a>
+							<ul class="dropdown">
+								<li><a href="game.html">Game</a></li>
+								<li><a href="cook.html">Let's Cook</a></li>
+								<!-- class="active" to make the nav button show as red to indicate user they are on this page -->
+								<li class="active"><a href="detection.html">Check Loneliness</a></li>
+							</ul>
+						</li>
+						<li><a href="personality_quiz.html">Find Hobbies</a></li>
+						<li><a href="all_personalities_and_activities.html">Browse</a></li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- The END of Navigation Bar -->
+
+		<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_1.jpg);" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7 text-left">
+						<div class="display-t">
+							<div class="display-tc animate-box" data-animate-effect="fadeInUp">
+								<h1 class="mb30">UCLA Loneliness Scale</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+
+
+		<div id="fh5co-blog" class="fh5co-bg-section">
+			<div class="container">
+				<div class="row animate-box row-pb-md" data-animate-effect="fadeInUp">
+					<div class="col-md-8 col-md-offset-2 text-left fh5co-heading">
+						<span>Self-assessment</span>
+						<h3>Please the following questions</h3>
+					</div>
+				</div>
+			</div>
+			<div id="ucla-quiz-container">
+				<div id="ucla-progress-bar">
+					<div id="ucla-progress">
+						<span id="progress-text">0%</span>
+					</div>
+				</div>
+
+				<div id="ucla-question-container">
+					<p id="ucla-question"></p>
+					<div id="options-container">
+						<button class="option-btn" onclick="selectOption(this, 'O')">I often feel this way</button>
+						<button class="option-btn" onclick="selectOption(this, 'S')">I sometimes feel this way</button>
+						<button class="option-btn" onclick="selectOption(this, 'R')">I rarely feel this way</button>
+						<button class="option-btn" onclick="selectOption(this, 'N')">I never feel this way</button>
+					</div>
+					<div id="navigation-buttons">
+        				<button onclick="previousQuestion()" id="previous-btn" style="display: none;">Previous</button>
+    				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-4 fh5co-widget ">
+					<h3>ElderIsolation</h3>
+					<p>Website dedicate for Elders in Melborne who may feels social isolated or alone</p>
+					<p><a href="#">Learn More</a></p>
+				</div>
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 ">
+					<ul class="fh5co-footer-links">
+						<li><a href="#">About</a></li>
+						<li><a href="#">Help</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">Teams</a></li>
+						<!-- <li><a href="#">Meetups</a></li> -->
+					</ul>
+				</div>
+				<div class="row copyright">
+					<div class="col-md-12 text-center">
+						<p>
+							<small class="block">&copy; 2024 TA14. All Rights Reserved.</small> 
+							<small class="block">Designed by <a href="http://gettemplates.co/" target="_blank">GetTemplates.co</a> Demo Images: <a href="http://pixeden.com/" target="_blank">Pixeden</a> &amp; <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- countTo -->
+	<script src="js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Stellar -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+	<!-- Test -->
+	<script src="js/ucla_test_script.js"></script>
+
+	</body>
+</html>
+
