@@ -199,17 +199,59 @@
 	<script src="js/main.js"></script>
 	<!-- Test Result -->
 	<script>
-        // Retrieve the result from sessionStorage
-        const result = sessionStorage.getItem('sentimentResult');
+    // Function to dynamically generate HTML based on the JSON structure
+    function generateHTMLFromJSON(jsonObj, indentLevel = 0) {
+        let html = '';
+        const indent = '&nbsp;'.repeat(indentLevel * 4); // Indent for better formatting
 
-        if (result) {
-            // Parse and display the result
-            const parsedResult = JSON.parse(result);
-            document.getElementById('result-details').innerHTML = `<strong>Details:</strong> ${JSON.stringify(parsedResult, null, 2)}`;
-        } else {
-            document.getElementById('result-details').innerHTML = 'No result found.';
+        for (const key in jsonObj) {
+            if (jsonObj.hasOwnProperty(key)) {
+                const value = jsonObj[key];
+
+                // If the value is an object, recursively display its content
+                if (typeof value === 'object' && value !== null) {
+                    html += `${indent}<strong>${key}:</strong><br>`;
+                    html += generateHTMLFromJSON(value, indentLevel + 1); // Recursive call for nested objects
+                } else {
+                    // Otherwise, just display the key-value pair
+                    html += `${indent}<strong>${key}:</strong> ${value}<br>`;
+                }
+            }
         }
-    </script>
+        return html;
+    }
+
+    // Retrieve the result from sessionStorage
+    const result = sessionStorage.getItem('sentimentResult');
+
+    if (result) {
+        try {
+            // Parse the JSON result
+            let parsedResult = JSON.parse(result);  // Use 'let' instead of 'const'
+
+            // If parsedResult is still a string (meaning it's a stringified JSON), parse it again
+            if (typeof parsedResult === 'string') {
+                parsedResult = JSON.parse(parsedResult);
+            }
+
+            // Dynamically generate HTML from the parsed JSON object
+            const htmlOutput = generateHTMLFromJSON(parsedResult);
+
+            // Insert the dynamically generated HTML into the result-details element
+            document.getElementById('result-details').innerHTML = `<strong>Details:</strong><br>${htmlOutput}`;
+        } catch (error) {
+            // Handle any errors in parsing
+            document.getElementById('result-details').innerHTML = 'Error parsing the result.';
+            console.error('Parsing error:', error);
+        }
+    } else {
+        document.getElementById('result-details').innerHTML = 'No result found.';
+    }
+</script>
+
+
+
+
 	</body>
 </html>
 
