@@ -38,7 +38,7 @@
 	<link rel="stylesheet" href="css/magnific-popup.css">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/styleCooking.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -127,6 +127,8 @@
 				<div id="result-container" class="result-container">
 					<label for="recipeOutput">Recipe Suggestions:</label>
 					<textarea id="recipeOutput" class="form-control" rows="10" readonly style="width: 100%; height: 400px;"></textarea>
+					<div id="loading-message" style="display:none; text-align:center; font-size:16px; color:#555;">
+						<p>Loading recipe suggestions, please wait...</p>
 				</div>
 			</div>
 		</div>
@@ -189,12 +191,19 @@
 			var formData = new FormData();
 			var imageFile = document.getElementById("image").files[0];
 	
+			// Check if an image is selected
 			if (!imageFile) {
 				alert("Please select an image before submitting!");
 				return;
 			}
 	
 			formData.append("image", imageFile);
+	
+			// Display the loading message
+			document.getElementById("loading-message").style.display = "block";
+	
+			// Clear the recipe output textarea
+			document.getElementById("recipeOutput").innerHTML = '';
 	
 			// Send POST request to the server
 			fetch("https://95alhmeubg.execute-api.ap-southeast-2.amazonaws.com/dev/get_recipe", {
@@ -205,10 +214,14 @@
 			.then(data => {
 				console.log(data);  // Check the returned data format
 				
+				// Hide the loading message
+				document.getElementById("loading-message").style.display = "none";
+	
+				// Check for errors in the response
 				if (data.error) {
-					document.getElementById("result").innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
+					document.getElementById("recipeOutput").innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
 				} else {
-					const imageUrl = data[0];  // Image URL
+					// Assume the first part of the response contains the image URL, and the second part contains recipe information
 					let recipesString = data[1];  // Recipe information as a string
 	
 					// Clean up the unnecessary text and format the output
@@ -223,13 +236,18 @@
 					recipesString = recipesString.replace(/Ingredients/g, '<strong style="color:#5bc0de; font-size:18px;">Ingredients</strong>');
 					recipesString = recipesString.replace(/Instructions/g, '<strong style="color:#5cb85c; font-size:18px;">Instructions</strong>');
 					
-					// Set the formatted string to the textarea as HTML
-					document.getElementById("recipeOutput").innerHTML = recipesString;
+					// Display the formatted recipe information
+					document.getElementById("recipeOutput").value = recipesString;
+
 				}
 			})
 			.catch(error => {
+				// Hide the loading message
+				document.getElementById("loading-message").style.display = "none";
+	
+				// Handle errors and display them in the result area
 				console.error('Error:', error);
-				document.getElementById("result").innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+				document.getElementById("recipeOutput").innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
 			});
 		}
 	</script>
