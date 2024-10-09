@@ -3,7 +3,8 @@ TITLE:
 Concept - 100% Fully Responsive Free HTML5 Bootstrap Template
 
 AUTHOR:
-DESIGNED & DEVELOPED by GetTemplates.co
+DESIGNED by TA14 and GetTemplates.co
+DEVELOPED by TA14 
 
 Website: http://gettemplates.co/
 Twitter: http://twitter.com/gettemplatesco
