@@ -1,6 +1,6 @@
 
 TITLE: 
-Concept - 100% Fully Responsive Free HTML5 Bootstrap Template
+ElderIsolation
 
 AUTHOR:
 DESIGNED by TA14 and GetTemplates.co
@@ -52,4 +52,7 @@ http://dimsemenov.com/plugins/magnific-popup/
 Demo Images:
 http://pixeden.com
 http://unsplash.com
+
+Template:
+Concept - 100% Fully Responsive Free HTML5 Bootstrap Template
 
